@@ -7,13 +7,12 @@ const mySubjects = [
 
 // Get all slots
 function getAllSlots() {
-    allSlots = {}
+    const allSlots = [];
     document.querySelectorAll('.mySubject').forEach(subject => {
         const name = isMySubject(subject);
         if (name) {
-            slots = scrapeSubject(subject, name);
-            allSlots = {...allSlots, ...slots};
-            console.log(JSON.stringify(slots, null, 2));
+            const slots = scrapeSubject(subject, name);
+            allSlots.push(...slots);
         }
     })
     console.log(JSON.stringify(allSlots, null, 2));
@@ -29,10 +28,11 @@ function isMySubject(subject) {
 }
 
 function scrapeSubject(subject, name) {
-    slots = {[name]: {}}
-    panelGroups = subject.querySelectorAll('.panel-group');
+    const slots = [];
+    const panelGroups = subject.querySelectorAll('.panel-group');
     panelGroups.forEach(panelGroup => {
-        type = panelGroup.querySelector('.panel-title').innerText.split(' ')[3].slice(0,1);
+        const type = panelGroup.querySelector('.panel-title').innerText.split(' ')[3].slice(0,1);
+        const typeSlots = [];
 
         panelGroup.querySelectorAll('.izoneThead').forEach(thead => {
             const input = thead.querySelector('input');
@@ -44,21 +44,23 @@ function scrapeSubject(subject, name) {
                 const tds = thead.nextElementSibling.querySelectorAll('td');
                 const location = tds[tds.length - 1].innerText;
 
-                info = {
+                const info = {
+                    name: name,
+                    type: type,
                     group: group,
                     day: day,
                     start: start.replace(':00', ''),
                     end: end.replace(':00', ''),
                     location: location
                 };
-
-                (slots[name][type] ??= []).push(info);
+                typeSlots.push(info);
             }
         })
+        slots.push(typeSlots);
 
-        if (!slots[name][type]) {
-            throw new Error(`Missing ${type} class for ${name}`);
-        };
+        // if (!slots[name][type]) {
+        //     throw new Error(`Missing ${type} class for ${name}`);
+        // };
     })
     return slots;
 }
