@@ -15,7 +15,7 @@ function getAllSlots() {
             allSlots.push(...slots);
         }
     })
-    console.log(JSON.stringify(allSlots, null, 2));
+    return allSlots;
 }
 
 function isMySubject(subject) {
@@ -56,14 +56,58 @@ function scrapeSubject(subject, name) {
                 typeSlots.push(info);
             }
         })
+        if (typeSlots.length === 0) {
+            throw new Error(`Missing ${type} class for ${name}`);
+        }
         slots.push(typeSlots);
-
-        // if (!slots[name][type]) {
-        //     throw new Error(`Missing ${type} class for ${name}`);
-        // };
     })
     return slots;
 }
 
+// Generate all combinations
+function toMinutes(t) {
+    const [h, m] = t.split(':').map(Number);
+    return h * 60 + m;
+}
+
+function clash(a, b) {
+    if (a.day !== b.day) return false;
+
+    const aStart = toMinutes(a.start);
+    const aEnd   = toMinutes(a.end);
+    const bStart = toMinutes(b.start);
+    const bEnd   = toMinutes(b.end);
+
+    return aStart < bEnd && bStart < aEnd;
+}
+
+function clashesWithAny(slot, selected) {
+    return selected.some(s => clash(slot, s));
+}
+
+function generateComb(groups) {
+    const results = [];
+
+    function backtrack(index, selected) {
+        if (index === groups.length) {
+            results.push([...selected]);
+            return;
+        }
+        for (const slot of groups[index]) {
+            if (!clashesWithAny(slot, selected)) {
+                selected.push(slot);
+                backtrack(index + 1, selected);
+                selected.pop();
+            }
+        }
+    }
+    backtrack(0, []);
+    return results;
+}
+
 // Main
-getAllSlots();
+allSlots = getAllSlots();
+console.log(JSON.stringify(allSlots, null, 2));
+combs = generateComb(allSlots);
+console.log(combs);
+console.log(combs.length);
