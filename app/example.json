@@ -1,46 +1,110 @@
-{
-    "ABC123": {
-        "L": [
-            {
-                "time": "0800-0900",
-                "teacher": "Jason"
-            },
-            {
-                "time": "0800-0900",
-                "teacher": "Jason"
-            }
-        ],
-        "P": [
-            {
-                "time": "0800-0900",
-                "teacher": "Jason"
-            },
-            {
-                "time": "0800-0900",
-                "teacher": "Jason"
-            }
-        ]
-    },
-    "ABC124": {
-        "L": [
-            {
-                "time": "0800-0900",
-                "teacher": "Jason"
-            },
-            {
-                "time": "0800-0900",
-                "teacher": "Jason"
-            }
-        ],
-        "P": [
-            {
-                "time": "0800-0900",
-                "teacher": "Jason"
-            },
-            {
-                "time": "0800-0900",
-                "teacher": "Jason"
-            }
-        ]
+[
+  {
+    "OSS1014 - Operating System Fundamentals": {
+      "L": [
+        {
+          "group": "1",
+          "day": "MON",
+          "start": "08:00",
+          "end": "10:00",
+          "location": "JC 1"
+        }
+      ],
+      "P": [
+        {
+          "group": "2",
+          "day": "THU",
+          "start": "08:00",
+          "end": "10:00",
+          "location": "UW-2-8"
+        },
+        {
+          "group": "3",
+          "day": "WED",
+          "start": "16:00",
+          "end": "18:00",
+          "location": "UE-2-16"
+        },
+        {
+          "group": "4",
+          "day": "TUE",
+          "start": "10:00",
+          "end": "12:00",
+          "location": "UW-2-6"
+        }
+      ]
     }
-}
+  },
+  {
+    "PRG1203 - Object-oriented Programming Fundamentals": {
+      "L": [
+        {
+          "group": "1",
+          "day": "WED",
+          "start": "14:00",
+          "end": "16:00",
+          "location": "JC 1"
+        }
+      ],
+      "P": [
+        {
+          "group": "1",
+          "day": "WED",
+          "start": "08:00",
+          "end": "10:00",
+          "location": "UW-2-10"
+        },
+        {
+          "group": "2",
+          "day": "MON",
+          "start": "08:00",
+          "end": "10:00",
+          "location": "UW-2-1"
+        },
+        {
+          "group": "3",
+          "day": "MON",
+          "start": "10:00",
+          "end": "12:00",
+          "location": "UW-2-1"
+        }
+      ]
+    }
+  },
+  {
+    "WEB1201 - Web Fundamentals": {
+      "L": [
+        {
+          "group": "1",
+          "day": "THU",
+          "start": "16:00",
+          "end": "18:00",
+          "location": "JC 1"
+        }
+      ],
+      "P": [
+        {
+          "group": "8",
+          "day": "TUE",
+          "start": "16:00",
+          "end": "18:00",
+          "location": "UE-2-16"
+        },
+        {
+          "group": "10",
+          "day": "MON",
+          "start": "16:00",
+          "end": "18:00",
+          "location": "UW-2-8"
+        },
+        {
+          "group": "12",
+          "day": "MON",
+          "start": "14:00",
+          "end": "16:00",
+          "location": "UW-2-9"
+        }
+      ]
+    }
+  }
+]
