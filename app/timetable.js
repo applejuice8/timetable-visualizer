@@ -97,14 +97,14 @@ function createTbody(cols) {
         th.innerHTML = day;
         tr.appendChild(th);
 
-        let i = 1;
+        let i = 0;
         while (i < cols) {
             const td = document.createElement('td');
             td.classList.add('p-10');
 
             for (const slot of slots) {
                 if (slot.day == day && timeToIndex(slot.start) == i) {
-                    td.innerHTML = slot.name;
+                    td.innerHTML = `${slot.name} (${slot.type})`;
                     console.log(td.innerHTML);
                     td.colSpan = 4;
                     i += 3;
@@ -127,7 +127,7 @@ function timeToIndex(timeStr) {
 const header = createHeader();
 table.appendChild(header);
 
-const cols = header.querySelectorAll('th').length;
+const cols = header.querySelectorAll('th').length - 1;
 const tbody = createTbody(cols);
 table.appendChild(tbody);
 
