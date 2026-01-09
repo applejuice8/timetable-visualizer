@@ -107,7 +107,7 @@ function generateComb(groups) {
 
 // Main
 allSlots = getAllSlots();
-console.log(JSON.stringify(allSlots, null, 2));
 combs = generateComb(allSlots);
-console.log(combs);
-console.log(combs.length);
+// console.log(JSON.stringify(allSlots, null, 2));
+// console.log(combs);
+console.log(JSON.stringify(combs, null, 2))
