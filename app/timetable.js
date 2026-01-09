@@ -58,29 +58,55 @@ const combs = [
 const days = ['MON', 'TUE', 'WED', 'THU', 'FRI'];
 const table = document.querySelector('#table');
 
-const header = document.createElement('tr');
-header.appendChild(document.createElement('td'));
+function createHeader() {
+    const header = document.createElement('thead');
+    const headerRow = document.createElement('tr');
+    header.appendChild(headerRow);
+    headerRow.appendChild(document.createElement('th'));
 
-let time = 800;
-while (time < 1900) {
-    const timeStr = time.toString();
-    const splitAt = timeStr.length - 2;
-    const hour = timeStr.slice(0, splitAt);
-    const min = timeStr.slice(splitAt);
+    let time = 800;
+    while (time < 1900) {
+        const timeStr = time.toString();
+        const splitAt = timeStr.length - 2;
+        const hour = timeStr.slice(0, splitAt);
+        const min = timeStr.slice(splitAt);
 
-    let hour2, min2;
-    if (min == '00') {
-        hour2 = hour;
-        min2 = '30';
-    } else {
-        hour2 = parseInt(hour) + 1;
-        min2 = '00';
+        let hour2, min2;
+        if (min == '00') {
+            hour2 = hour;
+            min2 = '30';
+        } else {
+            hour2 = parseInt(hour) + 1;
+            min2 = '00';
+        }
+        
+        const th = document.createElement('th');
+        th.innerHTML = `${hour}:${min}<br>-<br>${hour2}:${min2}`;
+        headerRow.appendChild(th);
+        
+        time += (min == '00') ? 30 : 70;
     }
-    
-    const th = document.createElement('th');
-    th.innerHTML = `${hour}:${min}<br>-<br>${hour2}:${min2}`;
-    header.appendChild(th);
-    
-    time += (min == '00') ? 30 : 70;
+    return header;
 }
+
+const header = createHeader();
 table.appendChild(header);
+const cols = header.querySelectorAll('th').length;
+
+const tbody = document.createElement('tbody');
+for (const day of days) {
+    const tr = document.createElement('tr');
+    const th = document.createElement('th');
+    th.innerHTML = day;
+    tr.appendChild(th);
+
+    for (let i = 1; i < cols; i++) {
+        const td = document.createElement('td');
+        td.innerHTML = 'abc';
+        tr.appendChild(td);
+    }
+    tbody.appendChild(tr);
+}
+table.appendChild(tbody);
+
+
