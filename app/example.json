@@ -1,0 +1,46 @@
+{
+    "ABC123": {
+        "L": [
+            {
+                "time": "0800-0900",
+                "teacher": "Jason"
+            },
+            {
+                "time": "0800-0900",
+                "teacher": "Jason"
+            }
+        ],
+        "P": [
+            {
+                "time": "0800-0900",
+                "teacher": "Jason"
+            },
+            {
+                "time": "0800-0900",
+                "teacher": "Jason"
+            }
+        ]
+    },
+    "ABC124": {
+        "L": [
+            {
+                "time": "0800-0900",
+                "teacher": "Jason"
+            },
+            {
+                "time": "0800-0900",
+                "teacher": "Jason"
+            }
+        ],
+        "P": [
+            {
+                "time": "0800-0900",
+                "teacher": "Jason"
+            },
+            {
+                "time": "0800-0900",
+                "teacher": "Jason"
+            }
+        ]
+    }
+}
