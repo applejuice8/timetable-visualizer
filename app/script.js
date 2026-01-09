@@ -7,12 +7,13 @@ const mySubjects = [
 
 // Get all slots
 function getAllSlots() {
-    allSlots = []
+    allSlots = {}
     document.querySelectorAll('.mySubject').forEach(subject => {
         const name = isMySubject(subject);
         if (name) {
             slots = scrapeSubject(subject, name);
-            allSlots.push(slots);
+            allSlots = {...allSlots, ...slots};
+            console.log(JSON.stringify(slots, null, 2));
         }
     })
     console.log(JSON.stringify(allSlots, null, 2));
