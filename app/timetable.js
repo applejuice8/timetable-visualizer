@@ -1,4 +1,4 @@
-const combs = [
+const slots = [
     {
       "name": "OSS1014 - Operating System Fundamentals",
       "type": "L",
@@ -89,24 +89,45 @@ function createHeader() {
     return header;
 }
 
+function createTbody(cols) {
+    const tbody = document.createElement('tbody');
+    for (const day of days) {
+        const tr = document.createElement('tr');
+        const th = document.createElement('th');
+        th.innerHTML = day;
+        tr.appendChild(th);
+
+        let i = 1;
+        while (i < cols) {
+            const td = document.createElement('td');
+            td.classList.add('p-10');
+
+            for (const slot of slots) {
+                if (slot.day == day && timeToIndex(slot.start) == i) {
+                    td.innerHTML = slot.name;
+                    console.log(td.innerHTML);
+                    td.colSpan = 4;
+                    i += 3;
+                    break;
+                }
+            }
+            tr.appendChild(td);
+            i++;
+        }
+        tbody.appendChild(tr);
+    }
+    return tbody;
+}
+
+function timeToIndex(timeStr) {
+    index = (parseInt(timeStr.replace('30', '50').replace(':', '')) - 800) / 50;
+    return index;
+}
+
 const header = createHeader();
 table.appendChild(header);
+
 const cols = header.querySelectorAll('th').length;
-
-const tbody = document.createElement('tbody');
-for (const day of days) {
-    const tr = document.createElement('tr');
-    const th = document.createElement('th');
-    th.innerHTML = day;
-    tr.appendChild(th);
-
-    for (let i = 1; i < cols; i++) {
-        const td = document.createElement('td');
-        td.innerHTML = 'abc';
-        tr.appendChild(td);
-    }
-    tbody.appendChild(tr);
-}
+const tbody = createTbody(cols);
 table.appendChild(tbody);
-
 
