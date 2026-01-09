@@ -91,6 +91,7 @@ function createHeader() {
 
 function createTbody(cols) {
     const tbody = document.createElement('tbody');
+    tbody.classList.add('table-group-divider');
     for (const day of days) {
         const tr = document.createElement('tr');
         const th = document.createElement('th');
@@ -104,9 +105,8 @@ function createTbody(cols) {
 
             for (const slot of slots) {
                 if (slot.day == day && timeToIndex(slot.start) == i) {
-                    td.innerHTML = `${slot.name} (${slot.type})`;
-                    console.log(td.innerHTML);
-                    td.colSpan = 4;
+                    td.innerHTML = `${slot.name} (${slot.type})<br>Group ${slot.group}`;
+                    td.colSpan = calcColSpan(slot.start, slot.end);
                     i += 3;
                     break;
                 }
@@ -122,6 +122,12 @@ function createTbody(cols) {
 function timeToIndex(timeStr) {
     index = (parseInt(timeStr.replace('30', '50').replace(':', '')) - 800) / 50;
     return index;
+}
+
+function calcColSpan(start, end) {
+    start = parseInt(start.replace('30', '50').replace(':', ''));
+    end = parseInt(end.replace('30', '50').replace(':', ''));
+    return (end - start) / 50;
 }
 
 const header = createHeader();
