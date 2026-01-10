@@ -1012,6 +1012,16 @@ const slots = [
 const days = ['MON', 'TUE', 'WED', 'THU', 'FRI'];
 const table = document.querySelector('#table');
 
+// Create empty timetable
+function createTimetable() {
+	const header = createHeader();
+	table.appendChild(header);
+
+	const cols = header.querySelectorAll('th').length - 1;
+	const tbody = createTbody(cols);
+	table.appendChild(tbody);
+}
+
 function createHeader() {
     const header = document.createElement('thead');
     const headerRow = document.createElement('tr');
@@ -1051,6 +1061,7 @@ function createTbody(cols) {
 		// Add th
 		const tr = document.createElement('tr');
 		const th = document.createElement('th');
+		tr.id = day;
 		th.innerHTML = day;
 		tr.appendChild(th);
 
@@ -1092,8 +1103,8 @@ function createTbody(cols) {
 //     return tbody;
 // }
 
-// Helpers
 
+// Helper functions
 function cleanTime(timeStr) {
 	const time = timeStr.replace('30', '50').replace(':', '');
 	return parseInt(time);
@@ -1105,34 +1116,59 @@ function timeToIndex(timeStr) {
 }
 
 function calcColSpan(startStr, endStr) {
-    start = cleanTime(startStr);
-    end = cleanTime(endStr);
+    const start = cleanTime(startStr);
+    const end = cleanTime(endStr);
     return (end - start) / 50;
 }
 
 function setupButton() {
 	document.getElementById('prev').addEventListener('click', () => {
-		if (currentIndex > 0) currentIndex--;
-		console.log(currentIndex);
+		if (currentIndex > 0) {
+			currentIndex--;
+			console.log(currentIndex);
+			renderTimetable(currentIndex);
+		}
 	})
 
 	document.getElementById('next').addEventListener('click', () => {
-		if (currentIndex < slots.length - 1) currentIndex++;
-		console.log(currentIndex);
+		if (currentIndex < slots.length - 1) {
+			currentIndex++;
+			console.log(currentIndex);
+			renderTimetable(currentIndex);
+		}
 	})
 }
 
-// Main
-function displayTimetable() {
-	const header = createHeader();
-	table.appendChild(header);
+function renderTimetable(index) {
+	const tds = document.querySelectorAll('td');
+	for (const td of tds) {
+		td.innerHTML = '';
+	}
 
-	const cols = header.querySelectorAll('th').length - 1;
-	const tbody = createTbody(cols);
-	table.appendChild(tbody);
+	const slot = slots[index];
+	
+	for (const cl of slot) {
+		const targetRow = document.querySelector(`#${cl.day}`);
+		const cols = targetRow.querySelectorAll('td');
+		const col = timeToIndex(cl.start);
+		cols[col].innerHTML = `${cl.name} (${cl.type})<br>Group ${cl.group}`;;
+	}
+
+	
+
+	// for (const cl of slots) {
+	// 	if (cl.day == day && timeToIndex(cl.start) == i) {
+	// 		td.innerHTML = `${cl.name} (${cl.type})<br>Group ${cl.group}`;
+	// 		const colSpan = calcColSpan(cl.start, cl.end);
+	// 		td.colSpan = colSpan;
+	// 		i += colSpan - 1;
+	// 		break;
+	// 	}
+	// }
 }
 
+// Main
 let currentIndex = 0;
 setupButton();
-displayTimetable();
-
+createTimetable();
+renderTimetable(currentIndex);
