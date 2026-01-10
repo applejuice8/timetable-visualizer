@@ -9,15 +9,17 @@
 </head>
 
 <body>
-    <h1>Timetable <span id="index">1</span></h1>
+    <div class="container text-center">
+        <h1>Timetable <span id="index">1</span></h1>
 
-    <div class="">
-        <table id="table" class="table table-success table-striped table-bordered border-primary text-center align-middle"></table>
-    </div>
+        <div class="table-responsive">
+            <table id="table" class="table table-secondary table-striped table-bordered border-secondary align-middle"></table>
+        </div>
 
-    <div class="nav-buttons">
-        <button id="prev">Prev</button>
-        <button id="next">Next</button>
+        <div class="d-flex justify-content-evenly">
+            <button id="prev" class="btn btn-dark">Prev</button>
+            <button id="next" class="btn btn-dark">Next</button>
+        </div>
     </div>
 
     <script src="timetable.js"></script>

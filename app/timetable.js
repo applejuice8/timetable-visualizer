@@ -1127,7 +1127,7 @@ function setupButton() {
 	document.getElementById('prev').addEventListener('click', () => {
 		if (currentIndex > 0) {
 			currentIndex--;
-			indexSpan.textContent = currentIndex - 1;
+			indexSpan.textContent = currentIndex + 1;
 			renderTimetable(currentIndex);
 		}
 	})
@@ -1144,7 +1144,7 @@ function setupButton() {
 function resetTimetable() {
 	document.querySelectorAll('td').forEach(td => {
 		td.textContent = '';
-		td.colSpan = 1;
+		td.colSpan = '';
 		td.style.display = '';
 	});
 }
