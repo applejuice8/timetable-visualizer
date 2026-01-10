@@ -1,4 +1,4 @@
-const slots = [
+const combs = [
   [
     {
       "name": "OSS1014 - Operating System Fundamentals",
@@ -1122,49 +1122,54 @@ function calcColSpan(startStr, endStr) {
 }
 
 function setupButton() {
+	indexSpan = document.getElementById('index');
+
 	document.getElementById('prev').addEventListener('click', () => {
 		if (currentIndex > 0) {
 			currentIndex--;
-			console.log(currentIndex);
+			indexSpan.textContent = currentIndex - 1;
 			renderTimetable(currentIndex);
 		}
 	})
 
 	document.getElementById('next').addEventListener('click', () => {
-		if (currentIndex < slots.length - 1) {
+		if (currentIndex < combs.length - 1) {
 			currentIndex++;
-			console.log(currentIndex);
+			indexSpan.textContent = currentIndex + 1;
 			renderTimetable(currentIndex);
 		}
 	})
 }
 
-function renderTimetable(index) {
-	const tds = document.querySelectorAll('td');
-	for (const td of tds) {
-		td.innerHTML = '';
-	}
+function resetTimetable() {
+	document.querySelectorAll('td').forEach(td => {
+		td.textContent = '';
+		td.colSpan = 1;
+		td.style.display = '';
+	});
+}
 
-	const slot = slots[index];
+function hideCols(cols, colIndex, colSpan) {
+	for (let i = 1; i < colSpan; i++) {
+		cols[colIndex + i].style.display = 'none';
+	}
+}
+
+function renderTimetable(index) {
+	resetTimetable();
+
+	const comb = combs[index];
 	
-	for (const cl of slot) {
+	for (const cl of comb) {
 		const targetRow = document.querySelector(`#${cl.day}`);
 		const cols = targetRow.querySelectorAll('td');
-		const col = timeToIndex(cl.start);
-		cols[col].innerHTML = `${cl.name} (${cl.type})<br>Group ${cl.group}`;;
+		const colIndex = timeToIndex(cl.start);
+		const colSpan = calcColSpan(cl.start, cl.end);
+
+		cols[colIndex].innerHTML = `${cl.name} (${cl.type})<br>Group ${cl.group}`;;
+		cols[colIndex].colSpan = colSpan;
+		hideCols(cols, colIndex, colSpan);
 	}
-
-	
-
-	// for (const cl of slots) {
-	// 	if (cl.day == day && timeToIndex(cl.start) == i) {
-	// 		td.innerHTML = `${cl.name} (${cl.type})<br>Group ${cl.group}`;
-	// 		const colSpan = calcColSpan(cl.start, cl.end);
-	// 		td.colSpan = colSpan;
-	// 		i += colSpan - 1;
-	// 		break;
-	// 	}
-	// }
 }
 
 // Main
