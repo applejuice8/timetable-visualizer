@@ -1,4 +1,5 @@
 const slots = [
+  [
     {
       "name": "OSS1014 - Operating System Fundamentals",
       "type": "L",
@@ -7,6 +8,17 @@ const slots = [
       "start": "08:00",
       "end": "10:00",
       "location": "JC 1"
+    }
+  ],
+  [
+    {
+      "name": "OSS1014 - Operating System Fundamentals",
+      "type": "P",
+      "group": "2",
+      "day": "THU",
+      "start": "08:00",
+      "end": "10:00",
+      "location": "UW-2-8"
     },
     {
       "name": "OSS1014 - Operating System Fundamentals",
@@ -18,6 +30,17 @@ const slots = [
       "location": "UE-2-16"
     },
     {
+      "name": "OSS1014 - Operating System Fundamentals",
+      "type": "P",
+      "group": "4",
+      "day": "TUE",
+      "start": "10:00",
+      "end": "12:00",
+      "location": "UW-2-6"
+    }
+  ],
+  [
+    {
       "name": "PRG1203 - Object-oriented Programming Fundamentals",
       "type": "L",
       "group": "1",
@@ -25,7 +48,9 @@ const slots = [
       "start": "14:00",
       "end": "16:00",
       "location": "JC 1"
-    },
+    }
+  ],
+  [
     {
       "name": "PRG1203 - Object-oriented Programming Fundamentals",
       "type": "P",
@@ -36,6 +61,26 @@ const slots = [
       "location": "UW-2-10"
     },
     {
+      "name": "PRG1203 - Object-oriented Programming Fundamentals",
+      "type": "P",
+      "group": "2",
+      "day": "MON",
+      "start": "08:00",
+      "end": "10:00",
+      "location": "UW-2-1"
+    },
+    {
+      "name": "PRG1203 - Object-oriented Programming Fundamentals",
+      "type": "P",
+      "group": "3",
+      "day": "MON",
+      "start": "10:00",
+      "end": "12:00",
+      "location": "UW-2-1"
+    }
+  ],
+  [
+    {
       "name": "WEB1201 - Web Fundamentals",
       "type": "L",
       "group": "1",
@@ -43,6 +88,17 @@ const slots = [
       "start": "16:00",
       "end": "18:00",
       "location": "JC 1"
+    }
+  ],
+  [
+    {
+      "name": "WEB1201 - Web Fundamentals",
+      "type": "P",
+      "group": "8",
+      "day": "TUE",
+      "start": "16:00",
+      "end": "18:00",
+      "location": "UE-2-16"
     },
     {
       "name": "WEB1201 - Web Fundamentals",
@@ -52,7 +108,17 @@ const slots = [
       "start": "16:00",
       "end": "18:00",
       "location": "UW-2-8"
+    },
+    {
+      "name": "WEB1201 - Web Fundamentals",
+      "type": "P",
+      "group": "12",
+      "day": "MON",
+      "start": "14:00",
+      "end": "16:00",
+      "location": "UW-2-9"
     }
+  ]
 ]
 
 const days = ['MON', 'TUE', 'WED', 'THU', 'FRI'];
@@ -141,6 +207,23 @@ function calcColSpan(start, end) {
     return (end - start) / 50;
 }
 
+let currentIndex = 0;
+document.getElementById('prev').addEventListener('click', () => {
+	if (currentIndex > 0) {
+		currentIndex--;
+		console.log(slots[currentIndex]);
+	}
+})
+
+document.getElementById('next').addEventListener('click', () => {
+	if (currentIndex < slots.length - 1) {
+		currentIndex++;
+		console.log(slots[currentIndex]);
+	}
+})
+
+
+// Main
 function displayTimetable() {
 	const header = createHeader();
 	table.appendChild(header);
@@ -150,5 +233,5 @@ function displayTimetable() {
 	table.appendChild(tbody);
 }
 
-displayTimetable();
+// displayTimetable();
 
