@@ -89,51 +89,66 @@ function createHeader() {
     return header;
 }
 
+function createDayRow(day) {
+	const tr = document.createElement('tr');
+	const th = document.createElement('th');
+	th.innerHTML = day;
+	tr.appendChild(th);
+	return tr;
+}
+
 function createTbody(cols) {
     const tbody = document.createElement('tbody');
     tbody.classList.add('table-group-divider');
+
     for (const day of days) {
-        const tr = document.createElement('tr');
-        const th = document.createElement('th');
-        th.innerHTML = day;
-        tr.appendChild(th);
+		const tr = createDayRow(day);
 
         let i = 0;
         while (i < cols) {
             const td = document.createElement('td');
-            td.classList.add('p-10');
 
             for (const slot of slots) {
                 if (slot.day == day && timeToIndex(slot.start) == i) {
                     td.innerHTML = `${slot.name} (${slot.type})<br>Group ${slot.group}`;
-                    td.colSpan = calcColSpan(slot.start, slot.end);
-                    i += 3;
+                    const colSpan = calcColSpan(slot.start, slot.end);
+					td.colSpan = colSpan;
+                    i += colSpan - 1;
                     break;
                 }
             }
             tr.appendChild(td);
             i++;
-        }
-        tbody.appendChild(tr);
+		}
+		tbody.appendChild(tr);
     }
     return tbody;
 }
 
+function cleanTime(timeStr) {
+	const time = timeStr.replace('30', '50').replace(':', '');
+	return parseInt(time);
+}
+
 function timeToIndex(timeStr) {
-    index = (parseInt(timeStr.replace('30', '50').replace(':', '')) - 800) / 50;
-    return index;
+    const time = cleanTime(timeStr);
+    return (time - 800) / 50;
 }
 
 function calcColSpan(start, end) {
-    start = parseInt(start.replace('30', '50').replace(':', ''));
-    end = parseInt(end.replace('30', '50').replace(':', ''));
+    start = cleanTime(start);
+    end = cleanTime(end);
     return (end - start) / 50;
 }
 
-const header = createHeader();
-table.appendChild(header);
+function displayTimetable() {
+	const header = createHeader();
+	table.appendChild(header);
 
-const cols = header.querySelectorAll('th').length - 1;
-const tbody = createTbody(cols);
-table.appendChild(tbody);
+	const cols = header.querySelectorAll('th').length - 1;
+	const tbody = createTbody(cols);
+	table.appendChild(tbody);
+}
+
+displayTimetable();
 
