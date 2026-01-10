@@ -7,15 +7,15 @@ const mySubjects = [
 
 // Get all slots
 function getAllSlots() {
-    const allSlots = [];
+    const slots = [];
     document.querySelectorAll('.mySubject').forEach(subject => {
         const name = isMySubject(subject);
         if (name) {
-            const slots = scrapeSubject(subject, name);
-            allSlots.push(...slots);
+            const slot = scrapeSubject(subject, name);
+            slots.push(...slot);
         }
     })
-    return allSlots;
+    return slots;
 }
 
 function isMySubject(subject) {
@@ -106,8 +106,6 @@ function generateComb(groups) {
 }
 
 // Main
-allSlots = getAllSlots();
-combs = generateComb(allSlots);
-// console.log(JSON.stringify(allSlots, null, 2));
-// console.log(combs);
-console.log(JSON.stringify(combs, null, 2))
+slots = getAllSlots();
+combs = generateComb(slots);
+console.log(JSON.stringify(combs, null, 2));
