@@ -1,0 +1,83 @@
+const comb = [
+  {
+    "name": "OSS1014 - Operating System Fundamentals",
+    "type": "L",
+    "group": "1",
+    "day": "MON",
+    "start": "08:00",
+    "end": "10:00",
+    "location": "JC 1"
+  },
+  {
+    "name": "OSS1014 - Operating System Fundamentals",
+    "type": "P",
+    "group": "2",
+    "day": "THU",
+    "start": "08:00",
+    "end": "10:00",
+    "location": "UW-2-8"
+  },
+  {
+    "name": "PRG1203 - Object-oriented Programming Fundamentals",
+    "type": "L",
+    "group": "1",
+    "day": "WED",
+    "start": "14:00",
+    "end": "16:00",
+    "location": "JC 1"
+  },
+  {
+    "name": "PRG1203 - Object-oriented Programming Fundamentals",
+    "type": "P",
+    "group": "1",
+    "day": "WED",
+    "start": "08:00",
+    "end": "10:00",
+    "location": "UW-2-10"
+  },
+  {
+    "name": "WEB1201 - Web Fundamentals",
+    "type": "L",
+    "group": "1",
+    "day": "THU",
+    "start": "16:00",
+    "end": "18:00",
+    "location": "JC 1"
+  },
+  {
+    "name": "WEB1201 - Web Fundamentals",
+    "type": "P",
+    "group": "10",
+    "day": "MON",
+    "start": "16:00",
+    "end": "18:00",
+    "location": "UW-2-8"
+  }
+]
+
+function injectButton() {
+    // Create the button
+    const button = document.createElement('button');
+    button.textContent = 'Click Me!';
+
+    // Style the button to always stay visible
+    Object.assign(button.style, {
+    position: 'fixed',   // Stick to the viewport
+    bottom: '20px',      // 20px from bottom
+    right: '20px',       // 20px from right
+    padding: '10px 20px',
+    backgroundColor: '#007BFF',
+    color: 'white',
+    border: 'none',
+    borderRadius: '5px',
+    cursor: 'pointer',
+    zIndex: '1000',      // Make sure it's on top
+    });
+
+    // Append the button to the body
+    document.body.appendChild(button);
+
+}
+
+// Main
+injectButton();

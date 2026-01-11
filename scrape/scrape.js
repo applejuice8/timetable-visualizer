@@ -9,7 +9,6 @@ function getAllSubjectSlots() {
     document.querySelectorAll('.mySubject').forEach(subject => {
         const name = isMySubject(subject);
         if (name) {
-            console.log(name);
             expandDropdown(subject);
             const slot = getSubjectSlots(subject, name);
             slots.push(...slot);
