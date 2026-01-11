@@ -1,0 +1,16 @@
+#table * {
+    padding: 10px;
+}
+
+td {
+    width: 200px;
+    height: 80px;
+    max-width: 200px;
+    max-height: 80px;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+#table th {
+    border: 2px solid black;
+}

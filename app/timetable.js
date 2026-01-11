@@ -1009,14 +1009,25 @@ const combs = [
   ]
 ]
 
-const days = ['MON', 'TUE', 'WED', 'THU', 'FRI'];
-const table = document.querySelector('#table');
+const COLORS = [
+	'#12f48e',
+	'#1ac1e7',
+	'#e5bd38',
+	'#dd3b49',
+	'#3772e6'
+]
+
+const DAYS = ['MON', 'TUE', 'WED', 'THU', 'FRI'];
 
 // Create empty timetable
 function createTimetable() {
+    const table = document.querySelector('#table');
+
+    // Create thead
 	const header = createHeader();
 	table.appendChild(header);
 
+    // Create tbody
 	const cols = header.querySelectorAll('th').length - 1;
 	const tbody = createTbody(cols);
 	table.appendChild(tbody);
@@ -1025,8 +1036,11 @@ function createTimetable() {
 function createHeader() {
     const header = document.createElement('thead');
     const headerRow = document.createElement('tr');
+	const emptyCell = document.createElement('th');
+	emptyCell.style.visibility = 'hidden';
+	headerRow.classList.add('table-primary');
+    headerRow.appendChild(emptyCell);
     header.appendChild(headerRow);
-    headerRow.appendChild(document.createElement('th'));
 
     let time = 800;
     while (time < 1900) {
@@ -1057,12 +1071,13 @@ function createTbody(cols) {
 	const tbody = document.createElement('tbody');
 	tbody.classList.add('table-group-divider');
 
-	for (const day of days) {
+	for (const day of DAYS) {
 		// Add th
 		const tr = document.createElement('tr');
 		const th = document.createElement('th');
 		tr.id = day;
 		th.innerHTML = day;
+		th.classList.add('table-primary');
 		tr.appendChild(th);
 
 		// Add td
@@ -1075,36 +1090,6 @@ function createTbody(cols) {
 	return tbody;
 }
 
-// function createTbody(cols) {
-//     const tbody = document.createElement('tbody');
-//     tbody.classList.add('table-group-divider');
-
-//     for (const day of days) {
-// 		const tr = createDayRow(day);
-
-//         let i = 0;
-//         while (i < cols) {
-//             const td = document.createElement('td');
-
-//             for (const slot of slots) {
-//                 if (slot.day == day && timeToIndex(slot.start) == i) {
-//                     td.innerHTML = `${slot.name} (${slot.type})<br>Group ${slot.group}`;
-//                     const colSpan = calcColSpan(slot.start, slot.end);
-// 					td.colSpan = colSpan;
-//                     i += colSpan - 1;
-//                     break;
-//                 }
-//             }
-//             tr.appendChild(td);
-//             i++;
-// 		}
-// 		tbody.appendChild(tr);
-//     }
-//     return tbody;
-// }
-
-
-// Helper functions
 function cleanTime(timeStr) {
 	const time = timeStr.replace('30', '50').replace(':', '');
 	return parseInt(time);
@@ -1141,11 +1126,12 @@ function setupButton() {
 	})
 }
 
-function resetTimetable() {
+function clearTimetable() {
 	document.querySelectorAll('td').forEach(td => {
 		td.textContent = '';
-		td.colSpan = '';
+		td.colSpan = 1;
 		td.style.display = '';
+		td.style.backgroundColor = '';
 	});
 }
 
@@ -1155,24 +1141,38 @@ function hideCols(cols, colIndex, colSpan) {
 	}
 }
 
+function getColor(name) {
+    if (!colorMap.has(name)) {
+        colorMap.set(name, COLORS[colorIndex++]);
+    }
+    return colorMap.get(name);
+}
+
 function renderTimetable(index) {
-	resetTimetable();
+	clearTimetable();
 
 	const comb = combs[index];
-	
+
 	for (const cl of comb) {
-		const targetRow = document.querySelector(`#${cl.day}`);
+        const name = cl.name;
+        const color = getColor(name);
+
+		const targetRow = document.getElementById(cl.day);
 		const cols = targetRow.querySelectorAll('td');
 		const colIndex = timeToIndex(cl.start);
 		const colSpan = calcColSpan(cl.start, cl.end);
+		const col = cols[colIndex];
 
-		cols[colIndex].innerHTML = `${cl.name} (${cl.type})<br>Group ${cl.group}`;;
-		cols[colIndex].colSpan = colSpan;
+		col.innerHTML = `${name} (${cl.type})<br>Group ${cl.group}`;;
+		col.colSpan = colSpan;
+        col.style.backgroundColor = color;
 		hideCols(cols, colIndex, colSpan);
 	}
 }
 
 // Main
+const colorMap = new Map();
+let colorIndex = 0;
 let currentIndex = 0;
 setupButton();
 createTimetable();
