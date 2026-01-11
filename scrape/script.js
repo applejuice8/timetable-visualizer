@@ -2,16 +2,16 @@ const mySubjects = [
     'operating system',
     'web fundamentals',
     'object-oriented',
-    // 'artificial intelligence'
 ];
 
-// Get all slots
-function getAllSlots() {
+function getAllSubjectSlots() {
     const slots = [];
     document.querySelectorAll('.mySubject').forEach(subject => {
         const name = isMySubject(subject);
         if (name) {
-            const slot = scrapeSubject(subject, name);
+            console.log(name);
+            expandDropdown(subject);
+            const slot = getSubjectSlots(subject, name);
             slots.push(...slot);
         }
     })
@@ -24,13 +24,20 @@ function isMySubject(subject) {
     if (mySubjects.some(s => name.toLowerCase().includes(s))) {
         return name;
     }
-    return null;
 }
 
-function scrapeSubject(subject, name) {
+function expandDropdown(subject) {
+    setTimeout(() => {
+        subject.querySelectorAll('.glyphicon-chevron-down').forEach(arrow => {
+            arrow.click();
+        });
+    }, 500);
+}
+
+function getSubjectSlots(subject, name) {
     const slots = [];
-    const panelGroups = subject.querySelectorAll('.panel-group');
-    panelGroups.forEach(panelGroup => {
+
+    subject.querySelectorAll('.panel-group').forEach(panelGroup => {
         const type = panelGroup.querySelector('.panel-title').innerText.split(' ')[3].slice(0,1);
         const typeSlots = [];
 
@@ -64,36 +71,33 @@ function scrapeSubject(subject, name) {
     return slots;
 }
 
-// Generate all combinations
-function toMinutes(t) {
-    const [h, m] = t.split(':').map(Number);
-    return h * 60 + m;
-}
-
-function clash(a, b) {
-    if (a.day !== b.day) return false;
-
-    const aStart = toMinutes(a.start);
-    const aEnd   = toMinutes(a.end);
-    const bStart = toMinutes(b.start);
-    const bEnd   = toMinutes(b.end);
-
-    return aStart < bEnd && bStart < aEnd;
+function toMinutes(time) {
+    const [hour, min] = time.split(':').map(Number);
+    return hour * 60 + min;
 }
 
 function clashesWithAny(slot, selected) {
-    return selected.some(s => clash(slot, s));
+    return selected.some(s => {
+        if (slot.day !== s.day) return false;
+
+        const slotStart = toMinutes(slot.start);
+        const slotEnd = toMinutes(slot.end);
+        const sStart = toMinutes(s.start);
+        const sEnd = toMinutes(s.end);
+
+        return slotStart < sEnd && sStart < slotEnd;
+    });
 }
 
-function generateComb(groups) {
-    const results = [];
+function generateComb(slots) {
+    const combs = [];
 
     function backtrack(index, selected) {
-        if (index === groups.length) {
-            results.push([...selected]);
+        if (index === slots.length) {
+            combs.push([...selected]);
             return;
         }
-        for (const slot of groups[index]) {
+        for (const slot of slots[index]) {
             if (!clashesWithAny(slot, selected)) {
                 selected.push(slot);
                 backtrack(index + 1, selected);
@@ -102,10 +106,10 @@ function generateComb(groups) {
         }
     }
     backtrack(0, []);
-    return results;
+    return combs;
 }
 
 // Main
-slots = getAllSlots();
+slots = getAllSubjectSlots();
 combs = generateComb(slots);
-console.log(JSON.stringify(combs, null, 2));
+// console.log(JSON.stringify(combs, null, 2));
