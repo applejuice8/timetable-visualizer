@@ -1106,7 +1106,7 @@ function calcColSpan(startStr, endStr) {
     return (end - start) / 50;
 }
 
-function setupButton() {
+function setupButtons() {
 	indexSpan = document.getElementById('index');
 
 	document.getElementById('prev').addEventListener('click', () => {
@@ -1124,6 +1124,11 @@ function setupButton() {
 			renderTimetable(currentIndex);
 		}
 	})
+
+  // Select button
+  document.getElementById('select').addEventListener('click', () => {
+    console.log(JSON.stringify(combs[currentIndex], null, 2));
+  })
 }
 
 function clearTimetable() {
@@ -1174,6 +1179,6 @@ function renderTimetable(index) {
 const colorMap = new Map();
 let colorIndex = 0;
 let currentIndex = 0;
-setupButton();
+setupButtons();
 createTimetable();
 renderTimetable(currentIndex);
