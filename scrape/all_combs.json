@@ -30,179 +30,29 @@
     {
       "name": "PRG1203 - Object-oriented Programming Fundamentals",
       "type": "P",
-      "group": "1",
-      "day": "WED",
-      "start": "08:00",
-      "end": "10:00",
-      "location": "UW-2-10"
-    },
-    {
-      "name": "WEB1201 - Web Fundamentals",
-      "type": "L",
-      "group": "1",
-      "day": "THU",
-      "start": "16:00",
-      "end": "18:00",
-      "location": "JC 1"
-    },
-    {
-      "name": "WEB1201 - Web Fundamentals",
-      "type": "P",
-      "group": "8",
-      "day": "TUE",
-      "start": "16:00",
-      "end": "18:00",
-      "location": "UE-2-16"
-    }
-  ],
-  [
-    {
-      "name": "OSS1014 - Operating System Fundamentals",
-      "type": "L",
-      "group": "1",
-      "day": "MON",
-      "start": "08:00",
-      "end": "10:00",
-      "location": "JC 1"
-    },
-    {
-      "name": "OSS1014 - Operating System Fundamentals",
-      "type": "P",
-      "group": "2",
-      "day": "THU",
-      "start": "08:00",
-      "end": "10:00",
-      "location": "UW-2-8"
-    },
-    {
-      "name": "PRG1203 - Object-oriented Programming Fundamentals",
-      "type": "L",
-      "group": "1",
-      "day": "WED",
-      "start": "14:00",
-      "end": "16:00",
-      "location": "JC 1"
-    },
-    {
-      "name": "PRG1203 - Object-oriented Programming Fundamentals",
-      "type": "P",
-      "group": "1",
-      "day": "WED",
-      "start": "08:00",
-      "end": "10:00",
-      "location": "UW-2-10"
-    },
-    {
-      "name": "WEB1201 - Web Fundamentals",
-      "type": "L",
-      "group": "1",
-      "day": "THU",
-      "start": "16:00",
-      "end": "18:00",
-      "location": "JC 1"
-    },
-    {
-      "name": "WEB1201 - Web Fundamentals",
-      "type": "P",
-      "group": "10",
-      "day": "MON",
-      "start": "16:00",
-      "end": "18:00",
-      "location": "UW-2-8"
-    }
-  ],
-  [
-    {
-      "name": "OSS1014 - Operating System Fundamentals",
-      "type": "L",
-      "group": "1",
-      "day": "MON",
-      "start": "08:00",
-      "end": "10:00",
-      "location": "JC 1"
-    },
-    {
-      "name": "OSS1014 - Operating System Fundamentals",
-      "type": "P",
-      "group": "2",
-      "day": "THU",
-      "start": "08:00",
-      "end": "10:00",
-      "location": "UW-2-8"
-    },
-    {
-      "name": "PRG1203 - Object-oriented Programming Fundamentals",
-      "type": "L",
-      "group": "1",
-      "day": "WED",
-      "start": "14:00",
-      "end": "16:00",
-      "location": "JC 1"
-    },
-    {
-      "name": "PRG1203 - Object-oriented Programming Fundamentals",
-      "type": "P",
-      "group": "1",
-      "day": "WED",
-      "start": "08:00",
-      "end": "10:00",
-      "location": "UW-2-10"
-    },
-    {
-      "name": "WEB1201 - Web Fundamentals",
-      "type": "L",
-      "group": "1",
-      "day": "THU",
-      "start": "16:00",
-      "end": "18:00",
-      "location": "JC 1"
-    },
-    {
-      "name": "WEB1201 - Web Fundamentals",
-      "type": "P",
-      "group": "12",
-      "day": "MON",
-      "start": "14:00",
-      "end": "16:00",
-      "location": "UW-2-9"
-    }
-  ],
-  [
-    {
-      "name": "OSS1014 - Operating System Fundamentals",
-      "type": "L",
-      "group": "1",
-      "day": "MON",
-      "start": "08:00",
-      "end": "10:00",
-      "location": "JC 1"
-    },
-    {
-      "name": "OSS1014 - Operating System Fundamentals",
-      "type": "P",
-      "group": "2",
-      "day": "THU",
-      "start": "08:00",
-      "end": "10:00",
-      "location": "UW-2-8"
-    },
-    {
-      "name": "PRG1203 - Object-oriented Programming Fundamentals",
-      "type": "L",
-      "group": "1",
-      "day": "WED",
-      "start": "14:00",
-      "end": "16:00",
-      "location": "JC 1"
-    },
-    {
-      "name": "PRG1203 - Object-oriented Programming Fundamentals",
-      "type": "P",
       "group": "3",
       "day": "MON",
       "start": "10:00",
       "end": "12:00",
       "location": "UW-2-1"
+    },
+    {
+      "name": "SEG1201 - Database Fundamentals",
+      "type": "L",
+      "group": "1",
+      "day": "WED",
+      "start": "08:00",
+      "end": "10:00",
+      "location": "JC 1"
+    },
+    {
+      "name": "SEG1201 - Database Fundamentals",
+      "type": "P",
+      "group": "12",
+      "day": "TUE",
+      "start": "08:00",
+      "end": "10:00",
+      "location": "UW-2-2"
     },
     {
       "name": "WEB1201 - Web Fundamentals",
@@ -261,6 +111,24 @@
       "location": "UW-2-1"
     },
     {
+      "name": "SEG1201 - Database Fundamentals",
+      "type": "L",
+      "group": "1",
+      "day": "WED",
+      "start": "08:00",
+      "end": "10:00",
+      "location": "JC 1"
+    },
+    {
+      "name": "SEG1201 - Database Fundamentals",
+      "type": "P",
+      "group": "12",
+      "day": "TUE",
+      "start": "08:00",
+      "end": "10:00",
+      "location": "UW-2-2"
+    },
+    {
       "name": "WEB1201 - Web Fundamentals",
       "type": "L",
       "group": "1",
@@ -317,6 +185,246 @@
       "location": "UW-2-1"
     },
     {
+      "name": "SEG1201 - Database Fundamentals",
+      "type": "L",
+      "group": "1",
+      "day": "WED",
+      "start": "08:00",
+      "end": "10:00",
+      "location": "JC 1"
+    },
+    {
+      "name": "SEG1201 - Database Fundamentals",
+      "type": "P",
+      "group": "12",
+      "day": "TUE",
+      "start": "08:00",
+      "end": "10:00",
+      "location": "UW-2-2"
+    },
+    {
+      "name": "WEB1201 - Web Fundamentals",
+      "type": "L",
+      "group": "1",
+      "day": "THU",
+      "start": "16:00",
+      "end": "18:00",
+      "location": "JC 1"
+    },
+    {
+      "name": "WEB1201 - Web Fundamentals",
+      "type": "P",
+      "group": "12",
+      "day": "MON",
+      "start": "14:00",
+      "end": "16:00",
+      "location": "UW-2-9"
+    }
+  ],
+  [
+    {
+      "name": "OSS1014 - Operating System Fundamentals",
+      "type": "L",
+      "group": "1",
+      "day": "MON",
+      "start": "08:00",
+      "end": "10:00",
+      "location": "JC 1"
+    },
+    {
+      "name": "OSS1014 - Operating System Fundamentals",
+      "type": "P",
+      "group": "2",
+      "day": "THU",
+      "start": "08:00",
+      "end": "10:00",
+      "location": "UW-2-8"
+    },
+    {
+      "name": "PRG1203 - Object-oriented Programming Fundamentals",
+      "type": "L",
+      "group": "1",
+      "day": "WED",
+      "start": "14:00",
+      "end": "16:00",
+      "location": "JC 1"
+    },
+    {
+      "name": "PRG1203 - Object-oriented Programming Fundamentals",
+      "type": "P",
+      "group": "3",
+      "day": "MON",
+      "start": "10:00",
+      "end": "12:00",
+      "location": "UW-2-1"
+    },
+    {
+      "name": "SEG1201 - Database Fundamentals",
+      "type": "L",
+      "group": "1",
+      "day": "WED",
+      "start": "08:00",
+      "end": "10:00",
+      "location": "JC 1"
+    },
+    {
+      "name": "SEG1201 - Database Fundamentals",
+      "type": "P",
+      "group": "15",
+      "day": "FRI",
+      "start": "10:00",
+      "end": "12:00",
+      "location": "UW-2-8"
+    },
+    {
+      "name": "WEB1201 - Web Fundamentals",
+      "type": "L",
+      "group": "1",
+      "day": "THU",
+      "start": "16:00",
+      "end": "18:00",
+      "location": "JC 1"
+    },
+    {
+      "name": "WEB1201 - Web Fundamentals",
+      "type": "P",
+      "group": "8",
+      "day": "TUE",
+      "start": "16:00",
+      "end": "18:00",
+      "location": "UE-2-16"
+    }
+  ],
+  [
+    {
+      "name": "OSS1014 - Operating System Fundamentals",
+      "type": "L",
+      "group": "1",
+      "day": "MON",
+      "start": "08:00",
+      "end": "10:00",
+      "location": "JC 1"
+    },
+    {
+      "name": "OSS1014 - Operating System Fundamentals",
+      "type": "P",
+      "group": "2",
+      "day": "THU",
+      "start": "08:00",
+      "end": "10:00",
+      "location": "UW-2-8"
+    },
+    {
+      "name": "PRG1203 - Object-oriented Programming Fundamentals",
+      "type": "L",
+      "group": "1",
+      "day": "WED",
+      "start": "14:00",
+      "end": "16:00",
+      "location": "JC 1"
+    },
+    {
+      "name": "PRG1203 - Object-oriented Programming Fundamentals",
+      "type": "P",
+      "group": "3",
+      "day": "MON",
+      "start": "10:00",
+      "end": "12:00",
+      "location": "UW-2-1"
+    },
+    {
+      "name": "SEG1201 - Database Fundamentals",
+      "type": "L",
+      "group": "1",
+      "day": "WED",
+      "start": "08:00",
+      "end": "10:00",
+      "location": "JC 1"
+    },
+    {
+      "name": "SEG1201 - Database Fundamentals",
+      "type": "P",
+      "group": "15",
+      "day": "FRI",
+      "start": "10:00",
+      "end": "12:00",
+      "location": "UW-2-8"
+    },
+    {
+      "name": "WEB1201 - Web Fundamentals",
+      "type": "L",
+      "group": "1",
+      "day": "THU",
+      "start": "16:00",
+      "end": "18:00",
+      "location": "JC 1"
+    },
+    {
+      "name": "WEB1201 - Web Fundamentals",
+      "type": "P",
+      "group": "10",
+      "day": "MON",
+      "start": "16:00",
+      "end": "18:00",
+      "location": "UW-2-8"
+    }
+  ],
+  [
+    {
+      "name": "OSS1014 - Operating System Fundamentals",
+      "type": "L",
+      "group": "1",
+      "day": "MON",
+      "start": "08:00",
+      "end": "10:00",
+      "location": "JC 1"
+    },
+    {
+      "name": "OSS1014 - Operating System Fundamentals",
+      "type": "P",
+      "group": "2",
+      "day": "THU",
+      "start": "08:00",
+      "end": "10:00",
+      "location": "UW-2-8"
+    },
+    {
+      "name": "PRG1203 - Object-oriented Programming Fundamentals",
+      "type": "L",
+      "group": "1",
+      "day": "WED",
+      "start": "14:00",
+      "end": "16:00",
+      "location": "JC 1"
+    },
+    {
+      "name": "PRG1203 - Object-oriented Programming Fundamentals",
+      "type": "P",
+      "group": "3",
+      "day": "MON",
+      "start": "10:00",
+      "end": "12:00",
+      "location": "UW-2-1"
+    },
+    {
+      "name": "SEG1201 - Database Fundamentals",
+      "type": "L",
+      "group": "1",
+      "day": "WED",
+      "start": "08:00",
+      "end": "10:00",
+      "location": "JC 1"
+    },
+    {
+      "name": "SEG1201 - Database Fundamentals",
+      "type": "P",
+      "group": "15",
+      "day": "FRI",
+      "start": "10:00",
+      "end": "12:00",
+      "location": "UW-2-8"
+    },
+    {
       "name": "WEB1201 - Web Fundamentals",
       "type": "L",
       "group": "1",
@@ -366,11 +474,29 @@
     {
       "name": "PRG1203 - Object-oriented Programming Fundamentals",
       "type": "P",
+      "group": "3",
+      "day": "MON",
+      "start": "10:00",
+      "end": "12:00",
+      "location": "UW-2-1"
+    },
+    {
+      "name": "SEG1201 - Database Fundamentals",
+      "type": "L",
       "group": "1",
       "day": "WED",
       "start": "08:00",
       "end": "10:00",
-      "location": "UW-2-10"
+      "location": "JC 1"
+    },
+    {
+      "name": "SEG1201 - Database Fundamentals",
+      "type": "P",
+      "group": "12",
+      "day": "TUE",
+      "start": "08:00",
+      "end": "10:00",
+      "location": "UW-2-2"
     },
     {
       "name": "WEB1201 - Web Fundamentals",
@@ -422,11 +548,29 @@
     {
       "name": "PRG1203 - Object-oriented Programming Fundamentals",
       "type": "P",
+      "group": "3",
+      "day": "MON",
+      "start": "10:00",
+      "end": "12:00",
+      "location": "UW-2-1"
+    },
+    {
+      "name": "SEG1201 - Database Fundamentals",
+      "type": "L",
       "group": "1",
       "day": "WED",
       "start": "08:00",
       "end": "10:00",
-      "location": "UW-2-10"
+      "location": "JC 1"
+    },
+    {
+      "name": "SEG1201 - Database Fundamentals",
+      "type": "P",
+      "group": "12",
+      "day": "TUE",
+      "start": "08:00",
+      "end": "10:00",
+      "location": "UW-2-2"
     },
     {
       "name": "WEB1201 - Web Fundamentals",
@@ -478,11 +622,29 @@
     {
       "name": "PRG1203 - Object-oriented Programming Fundamentals",
       "type": "P",
+      "group": "3",
+      "day": "MON",
+      "start": "10:00",
+      "end": "12:00",
+      "location": "UW-2-1"
+    },
+    {
+      "name": "SEG1201 - Database Fundamentals",
+      "type": "L",
       "group": "1",
       "day": "WED",
       "start": "08:00",
       "end": "10:00",
-      "location": "UW-2-10"
+      "location": "JC 1"
+    },
+    {
+      "name": "SEG1201 - Database Fundamentals",
+      "type": "P",
+      "group": "12",
+      "day": "TUE",
+      "start": "08:00",
+      "end": "10:00",
+      "location": "UW-2-2"
     },
     {
       "name": "WEB1201 - Web Fundamentals",
@@ -541,6 +703,24 @@
       "location": "UW-2-1"
     },
     {
+      "name": "SEG1201 - Database Fundamentals",
+      "type": "L",
+      "group": "1",
+      "day": "WED",
+      "start": "08:00",
+      "end": "10:00",
+      "location": "JC 1"
+    },
+    {
+      "name": "SEG1201 - Database Fundamentals",
+      "type": "P",
+      "group": "15",
+      "day": "FRI",
+      "start": "10:00",
+      "end": "12:00",
+      "location": "UW-2-8"
+    },
+    {
       "name": "WEB1201 - Web Fundamentals",
       "type": "L",
       "group": "1",
@@ -595,6 +775,24 @@
       "start": "10:00",
       "end": "12:00",
       "location": "UW-2-1"
+    },
+    {
+      "name": "SEG1201 - Database Fundamentals",
+      "type": "L",
+      "group": "1",
+      "day": "WED",
+      "start": "08:00",
+      "end": "10:00",
+      "location": "JC 1"
+    },
+    {
+      "name": "SEG1201 - Database Fundamentals",
+      "type": "P",
+      "group": "15",
+      "day": "FRI",
+      "start": "10:00",
+      "end": "12:00",
+      "location": "UW-2-8"
     },
     {
       "name": "WEB1201 - Web Fundamentals",
@@ -653,172 +851,22 @@
       "location": "UW-2-1"
     },
     {
-      "name": "WEB1201 - Web Fundamentals",
+      "name": "SEG1201 - Database Fundamentals",
       "type": "L",
       "group": "1",
-      "day": "THU",
-      "start": "16:00",
-      "end": "18:00",
-      "location": "JC 1"
-    },
-    {
-      "name": "WEB1201 - Web Fundamentals",
-      "type": "P",
-      "group": "12",
-      "day": "MON",
-      "start": "14:00",
-      "end": "16:00",
-      "location": "UW-2-9"
-    }
-  ],
-  [
-    {
-      "name": "OSS1014 - Operating System Fundamentals",
-      "type": "L",
-      "group": "1",
-      "day": "MON",
+      "day": "WED",
       "start": "08:00",
       "end": "10:00",
       "location": "JC 1"
     },
     {
-      "name": "OSS1014 - Operating System Fundamentals",
+      "name": "SEG1201 - Database Fundamentals",
       "type": "P",
-      "group": "4",
-      "day": "TUE",
+      "group": "15",
+      "day": "FRI",
       "start": "10:00",
       "end": "12:00",
-      "location": "UW-2-6"
-    },
-    {
-      "name": "PRG1203 - Object-oriented Programming Fundamentals",
-      "type": "L",
-      "group": "1",
-      "day": "WED",
-      "start": "14:00",
-      "end": "16:00",
-      "location": "JC 1"
-    },
-    {
-      "name": "PRG1203 - Object-oriented Programming Fundamentals",
-      "type": "P",
-      "group": "1",
-      "day": "WED",
-      "start": "08:00",
-      "end": "10:00",
-      "location": "UW-2-10"
-    },
-    {
-      "name": "WEB1201 - Web Fundamentals",
-      "type": "L",
-      "group": "1",
-      "day": "THU",
-      "start": "16:00",
-      "end": "18:00",
-      "location": "JC 1"
-    },
-    {
-      "name": "WEB1201 - Web Fundamentals",
-      "type": "P",
-      "group": "8",
-      "day": "TUE",
-      "start": "16:00",
-      "end": "18:00",
-      "location": "UE-2-16"
-    }
-  ],
-  [
-    {
-      "name": "OSS1014 - Operating System Fundamentals",
-      "type": "L",
-      "group": "1",
-      "day": "MON",
-      "start": "08:00",
-      "end": "10:00",
-      "location": "JC 1"
-    },
-    {
-      "name": "OSS1014 - Operating System Fundamentals",
-      "type": "P",
-      "group": "4",
-      "day": "TUE",
-      "start": "10:00",
-      "end": "12:00",
-      "location": "UW-2-6"
-    },
-    {
-      "name": "PRG1203 - Object-oriented Programming Fundamentals",
-      "type": "L",
-      "group": "1",
-      "day": "WED",
-      "start": "14:00",
-      "end": "16:00",
-      "location": "JC 1"
-    },
-    {
-      "name": "PRG1203 - Object-oriented Programming Fundamentals",
-      "type": "P",
-      "group": "1",
-      "day": "WED",
-      "start": "08:00",
-      "end": "10:00",
-      "location": "UW-2-10"
-    },
-    {
-      "name": "WEB1201 - Web Fundamentals",
-      "type": "L",
-      "group": "1",
-      "day": "THU",
-      "start": "16:00",
-      "end": "18:00",
-      "location": "JC 1"
-    },
-    {
-      "name": "WEB1201 - Web Fundamentals",
-      "type": "P",
-      "group": "10",
-      "day": "MON",
-      "start": "16:00",
-      "end": "18:00",
       "location": "UW-2-8"
-    }
-  ],
-  [
-    {
-      "name": "OSS1014 - Operating System Fundamentals",
-      "type": "L",
-      "group": "1",
-      "day": "MON",
-      "start": "08:00",
-      "end": "10:00",
-      "location": "JC 1"
-    },
-    {
-      "name": "OSS1014 - Operating System Fundamentals",
-      "type": "P",
-      "group": "4",
-      "day": "TUE",
-      "start": "10:00",
-      "end": "12:00",
-      "location": "UW-2-6"
-    },
-    {
-      "name": "PRG1203 - Object-oriented Programming Fundamentals",
-      "type": "L",
-      "group": "1",
-      "day": "WED",
-      "start": "14:00",
-      "end": "16:00",
-      "location": "JC 1"
-    },
-    {
-      "name": "PRG1203 - Object-oriented Programming Fundamentals",
-      "type": "P",
-      "group": "1",
-      "day": "WED",
-      "start": "08:00",
-      "end": "10:00",
-      "location": "UW-2-10"
     },
     {
       "name": "WEB1201 - Web Fundamentals",
@@ -877,6 +925,24 @@
       "location": "UW-2-1"
     },
     {
+      "name": "SEG1201 - Database Fundamentals",
+      "type": "L",
+      "group": "1",
+      "day": "WED",
+      "start": "08:00",
+      "end": "10:00",
+      "location": "JC 1"
+    },
+    {
+      "name": "SEG1201 - Database Fundamentals",
+      "type": "P",
+      "group": "12",
+      "day": "TUE",
+      "start": "08:00",
+      "end": "10:00",
+      "location": "UW-2-2"
+    },
+    {
       "name": "WEB1201 - Web Fundamentals",
       "type": "L",
       "group": "1",
@@ -933,6 +999,24 @@
       "location": "UW-2-1"
     },
     {
+      "name": "SEG1201 - Database Fundamentals",
+      "type": "L",
+      "group": "1",
+      "day": "WED",
+      "start": "08:00",
+      "end": "10:00",
+      "location": "JC 1"
+    },
+    {
+      "name": "SEG1201 - Database Fundamentals",
+      "type": "P",
+      "group": "12",
+      "day": "TUE",
+      "start": "08:00",
+      "end": "10:00",
+      "location": "UW-2-2"
+    },
+    {
       "name": "WEB1201 - Web Fundamentals",
       "type": "L",
       "group": "1",
@@ -987,6 +1071,246 @@
       "start": "10:00",
       "end": "12:00",
       "location": "UW-2-1"
+    },
+    {
+      "name": "SEG1201 - Database Fundamentals",
+      "type": "L",
+      "group": "1",
+      "day": "WED",
+      "start": "08:00",
+      "end": "10:00",
+      "location": "JC 1"
+    },
+    {
+      "name": "SEG1201 - Database Fundamentals",
+      "type": "P",
+      "group": "12",
+      "day": "TUE",
+      "start": "08:00",
+      "end": "10:00",
+      "location": "UW-2-2"
+    },
+    {
+      "name": "WEB1201 - Web Fundamentals",
+      "type": "L",
+      "group": "1",
+      "day": "THU",
+      "start": "16:00",
+      "end": "18:00",
+      "location": "JC 1"
+    },
+    {
+      "name": "WEB1201 - Web Fundamentals",
+      "type": "P",
+      "group": "12",
+      "day": "MON",
+      "start": "14:00",
+      "end": "16:00",
+      "location": "UW-2-9"
+    }
+  ],
+  [
+    {
+      "name": "OSS1014 - Operating System Fundamentals",
+      "type": "L",
+      "group": "1",
+      "day": "MON",
+      "start": "08:00",
+      "end": "10:00",
+      "location": "JC 1"
+    },
+    {
+      "name": "OSS1014 - Operating System Fundamentals",
+      "type": "P",
+      "group": "4",
+      "day": "TUE",
+      "start": "10:00",
+      "end": "12:00",
+      "location": "UW-2-6"
+    },
+    {
+      "name": "PRG1203 - Object-oriented Programming Fundamentals",
+      "type": "L",
+      "group": "1",
+      "day": "WED",
+      "start": "14:00",
+      "end": "16:00",
+      "location": "JC 1"
+    },
+    {
+      "name": "PRG1203 - Object-oriented Programming Fundamentals",
+      "type": "P",
+      "group": "3",
+      "day": "MON",
+      "start": "10:00",
+      "end": "12:00",
+      "location": "UW-2-1"
+    },
+    {
+      "name": "SEG1201 - Database Fundamentals",
+      "type": "L",
+      "group": "1",
+      "day": "WED",
+      "start": "08:00",
+      "end": "10:00",
+      "location": "JC 1"
+    },
+    {
+      "name": "SEG1201 - Database Fundamentals",
+      "type": "P",
+      "group": "15",
+      "day": "FRI",
+      "start": "10:00",
+      "end": "12:00",
+      "location": "UW-2-8"
+    },
+    {
+      "name": "WEB1201 - Web Fundamentals",
+      "type": "L",
+      "group": "1",
+      "day": "THU",
+      "start": "16:00",
+      "end": "18:00",
+      "location": "JC 1"
+    },
+    {
+      "name": "WEB1201 - Web Fundamentals",
+      "type": "P",
+      "group": "8",
+      "day": "TUE",
+      "start": "16:00",
+      "end": "18:00",
+      "location": "UE-2-16"
+    }
+  ],
+  [
+    {
+      "name": "OSS1014 - Operating System Fundamentals",
+      "type": "L",
+      "group": "1",
+      "day": "MON",
+      "start": "08:00",
+      "end": "10:00",
+      "location": "JC 1"
+    },
+    {
+      "name": "OSS1014 - Operating System Fundamentals",
+      "type": "P",
+      "group": "4",
+      "day": "TUE",
+      "start": "10:00",
+      "end": "12:00",
+      "location": "UW-2-6"
+    },
+    {
+      "name": "PRG1203 - Object-oriented Programming Fundamentals",
+      "type": "L",
+      "group": "1",
+      "day": "WED",
+      "start": "14:00",
+      "end": "16:00",
+      "location": "JC 1"
+    },
+    {
+      "name": "PRG1203 - Object-oriented Programming Fundamentals",
+      "type": "P",
+      "group": "3",
+      "day": "MON",
+      "start": "10:00",
+      "end": "12:00",
+      "location": "UW-2-1"
+    },
+    {
+      "name": "SEG1201 - Database Fundamentals",
+      "type": "L",
+      "group": "1",
+      "day": "WED",
+      "start": "08:00",
+      "end": "10:00",
+      "location": "JC 1"
+    },
+    {
+      "name": "SEG1201 - Database Fundamentals",
+      "type": "P",
+      "group": "15",
+      "day": "FRI",
+      "start": "10:00",
+      "end": "12:00",
+      "location": "UW-2-8"
+    },
+    {
+      "name": "WEB1201 - Web Fundamentals",
+      "type": "L",
+      "group": "1",
+      "day": "THU",
+      "start": "16:00",
+      "end": "18:00",
+      "location": "JC 1"
+    },
+    {
+      "name": "WEB1201 - Web Fundamentals",
+      "type": "P",
+      "group": "10",
+      "day": "MON",
+      "start": "16:00",
+      "end": "18:00",
+      "location": "UW-2-8"
+    }
+  ],
+  [
+    {
+      "name": "OSS1014 - Operating System Fundamentals",
+      "type": "L",
+      "group": "1",
+      "day": "MON",
+      "start": "08:00",
+      "end": "10:00",
+      "location": "JC 1"
+    },
+    {
+      "name": "OSS1014 - Operating System Fundamentals",
+      "type": "P",
+      "group": "4",
+      "day": "TUE",
+      "start": "10:00",
+      "end": "12:00",
+      "location": "UW-2-6"
+    },
+    {
+      "name": "PRG1203 - Object-oriented Programming Fundamentals",
+      "type": "L",
+      "group": "1",
+      "day": "WED",
+      "start": "14:00",
+      "end": "16:00",
+      "location": "JC 1"
+    },
+    {
+      "name": "PRG1203 - Object-oriented Programming Fundamentals",
+      "type": "P",
+      "group": "3",
+      "day": "MON",
+      "start": "10:00",
+      "end": "12:00",
+      "location": "UW-2-1"
+    },
+    {
+      "name": "SEG1201 - Database Fundamentals",
+      "type": "L",
+      "group": "1",
+      "day": "WED",
+      "start": "08:00",
+      "end": "10:00",
+      "location": "JC 1"
+    },
+    {
+      "name": "SEG1201 - Database Fundamentals",
+      "type": "P",
+      "group": "15",
+      "day": "FRI",
+      "start": "10:00",
+      "end": "12:00",
+      "location": "UW-2-8"
     },
     {
       "name": "WEB1201 - Web Fundamentals",

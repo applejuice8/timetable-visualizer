@@ -2,6 +2,7 @@ const mySubjects = [
     'operating system',
     'web fundamentals',
     'object-oriented',
+    'database fundamentals'
 ];
 
 function getAllSubjectSlots() {
