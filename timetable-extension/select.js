@@ -1,9 +1,20 @@
-function selectAllSubjects() {
+chrome.runtime.onMessage.addListener((msg) => {
+    if (msg.type === 'SELECTED') {
+        console.log('Received SELECTED message:', msg.payload);
+        const comb = msg.payload;
+        
+        // interact with website DOM here
+        selectAllSubjects(comb); // Pass comb as parameter
+        submit();
+    }
+});
+
+function selectAllSubjects(comb) {
     document.querySelectorAll('.mySubject').forEach(subject => {
         const name = subject.querySelector('label').innerText;
         if (comb.some(item => item.name === name)) {
             expandDropdown(subject);
-            selectSubject(subject, name);
+            selectSubject(subject, name, comb);
         }
     })
 }
@@ -16,7 +27,7 @@ function expandDropdown(subject) {
     }, 500);
 }
 
-function selectSubject(subject, name) {
+function selectSubject(subject, name, comb) {
     const options = subject.querySelectorAll('input[type="radio"]');
 
     comb.forEach(cl => {
@@ -49,17 +60,3 @@ function submit() {
 }
 
 // Main
-function select() {
-    chrome.runtime.onMessage.addListener((msg) => {
-        if (msg.type === 'SELECTED') {
-            const comb = msg.payload;
-
-            // interact with website DOM here
-            selectAllSubjects();
-            submit();
-        }
-    });
-}
-
-console.log('[select] loaded');
-select();

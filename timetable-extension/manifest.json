@@ -14,5 +14,9 @@
 
   "action": {
     "default_popup": "timetable.html"
+  },
+
+  "background": {
+    "service_worker": "background.js"
   }
 }

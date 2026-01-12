@@ -1,7 +1,12 @@
-let combs;
+const colorMap = new Map();
+let colorIndex = 0;
+let currentIndex = 0;
+let combs = [];
+
 chrome.runtime.onMessage.addListener((msg) => {
     if (msg.type === 'SCRAPED_DATA') {
         combs = msg.payload;
+        renderTimetable(currentIndex);
     }
 });
 
@@ -111,7 +116,7 @@ function setupButtons() {
 			indexSpan.textContent = currentIndex + 1;
 			renderTimetable(currentIndex);
 		}
-	})
+	});
 
 	document.getElementById('next').addEventListener('click', () => {
 		if (currentIndex < combs.length - 1) {
@@ -119,15 +124,25 @@ function setupButtons() {
 			indexSpan.textContent = currentIndex + 1;
 			renderTimetable(currentIndex);
 		}
-	})
+	});
 
-    // Select button
+    // Refresh
+    document.getElementById('refresh').addEventListener('click', () => {
+        chrome.runtime.sendMessage({ type: 'SCRAPE' });
+    });
+
+    // Select
     document.getElementById('select').addEventListener('click', () => {
-        chrome.runtime.sendMessage({
-            type: 'SELECTED',
-            payload: combs[currentIndex]
-        });
-    })
+        if (combs && combs[currentIndex]) {
+            console.log('Selecting combination:', currentIndex);
+            chrome.runtime.sendMessage({
+                type: 'SELECTED',
+                payload: combs[currentIndex]
+            });
+        } else {
+            console.log('No data to select');
+        }
+    });
 }
 
 function clearTimetable() {
@@ -155,8 +170,8 @@ function getColor(name) {
 function renderTimetable(index) {
 	clearTimetable();
 
-	if (!combs) return;
     const comb = combs[index];
+    if (!comb) return;
 
 	for (const cl of comb) {
         const name = cl.name;
@@ -177,10 +192,6 @@ function renderTimetable(index) {
 
 // Main
 function timetable() {
-    console.log('[timetable] loaded');
-    const colorMap = new Map();
-    let colorIndex = 0;
-    let currentIndex = 0;
     setupButtons();
     createTimetable();
     renderTimetable(currentIndex);

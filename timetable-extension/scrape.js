@@ -5,6 +5,15 @@ const mySubjects = [
     'database fundamentals'
 ];
 
+chrome.runtime.onMessage.addListener((msg) => {
+    console.log(msg.type);
+    if (msg.type === 'SCRAPE') {
+        console.log('Start scraping');
+        scrape();
+        console.log('Done scraping');
+    }
+});
+
 function getAllSubjectSlots() {
     const slots = [];
     document.querySelectorAll('.mySubject').forEach(subject => {
@@ -119,6 +128,3 @@ function scrape() {
         payload: combs
     });
 }
-
-console.log('[scrape] loaded');
-scrape();
