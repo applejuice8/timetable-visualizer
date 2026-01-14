@@ -131,6 +131,8 @@ function setupButtons() {
     // Refresh
     document.getElementById('refresh').addEventListener('click', () => {
         chrome.runtime.sendMessage({ type: 'SCRAPE' });
+		currentIndex = 0;
+		indexSpan.textContent = currentIndex + 1;
     });
 
     // Select
