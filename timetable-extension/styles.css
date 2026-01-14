@@ -1,3 +1,9 @@
+html, body {
+    max-height: 600px;
+    width: 800px;
+    overflow: hidden;
+}
+
 #popup {
     background-color: greenyellow;
 }
@@ -6,26 +12,15 @@
     display: none;
 }
 
-#table * {
-    padding: 10px;
-}
-
-td {
-    width: 200px;
-    height: 80px;
-    max-width: 200px;
-    max-height: 80px;
+#table td, #table th {
+    max-width: 60px;
+    height: 60px;
     white-space: nowrap;
     overflow: hidden;
 }
 
 #table th {
     border: 2px solid black;
-}
-
-.container {
-    max-height: 600px;
-    max-width: 800px;
 }
 
 tbody th {
