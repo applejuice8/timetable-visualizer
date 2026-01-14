@@ -6,6 +6,7 @@ let combs = [];
 chrome.runtime.onMessage.addListener((msg) => {
     if (msg.type === 'SCRAPED_DATA') {
         combs = msg.payload;
+		showPopup('Refreshed time slots');
         renderTimetable(currentIndex);
     }
 });
@@ -139,6 +140,7 @@ function setupButtons() {
                 type: 'SELECTED',
                 payload: combs[currentIndex]
             });
+			showPopup(`Selected Timetable ${currentIndex + 1}`);
         } else {
             console.log('No data to select');
         }
@@ -188,6 +190,20 @@ function renderTimetable(index) {
         col.style.backgroundColor = color;
 		hideCols(cols, colIndex, colSpan);
 	}
+}
+
+let popupTimeout;
+function showPopup(message, duration=3000) {
+	const popup = document.getElementById('popup');
+
+	window.scrollTo(0, 0);
+	popup.textContent = message;
+	popup.classList.remove('hidden');
+
+	clearTimeout(popupTimeout);
+	popupTimeout = setTimeout(() => {
+		popup.classList.add('hidden');
+	}, duration);
 }
 
 // Main

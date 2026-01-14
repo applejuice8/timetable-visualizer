@@ -1,3 +1,11 @@
+#popup {
+    background-color: greenyellow;
+}
+
+.hidden {
+    display: none;
+}
+
 #table * {
     padding: 10px;
 }
