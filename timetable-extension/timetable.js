@@ -187,8 +187,9 @@ function renderTimetable(index) {
 		const colIndex = timeToIndex(cl.start);
 		const colSpan = calcColSpan(cl.start, cl.end);
 		const col = cols[colIndex];
+		const cleanName = name.split(' - ')[1].slice(0, 5.5 * colSpan);		//22
 
-		col.innerHTML = `${name} (${cl.type})<br>Group ${cl.group}`;;
+		col.innerHTML = `${cleanName} (${cl.type})<br>Group ${cl.group}`;;
 		col.colSpan = colSpan;
         col.style.backgroundColor = color;
 		hideCols(cols, colIndex, colSpan);
