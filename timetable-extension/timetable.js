@@ -39,7 +39,7 @@ function createHeader() {
     const header = document.createElement('thead');
     const headerRow = document.createElement('tr');
 	const emptyCell = document.createElement('th');
-	emptyCell.style.visibility = 'hidden';
+	emptyCell.id = 'empty';
 	headerRow.classList.add('table-primary');
     headerRow.appendChild(emptyCell);
     header.appendChild(headerRow);
