@@ -2,14 +2,7 @@ const colorMap = new Map();
 let colorIndex = 0;
 let currentIndex = 0;
 let combs = [];
-
-chrome.runtime.onMessage.addListener((msg) => {
-    if (msg.type === 'SCRAPED_DATA') {
-        combs = msg.payload;
-		showPopup('Refreshed time slots');
-        renderTimetable(currentIndex);
-    }
-});
+let popupTimeout;
 
 const COLORS = [
 	'#12f48e',
@@ -20,6 +13,14 @@ const COLORS = [
 ]
 
 const DAYS = ['MON', 'TUE', 'WED', 'THU', 'FRI'];
+
+chrome.runtime.onMessage.addListener((msg) => {
+    if (msg.type === 'SCRAPED_DATA') {
+        combs = msg.payload;
+		showPopup('Refreshed time slots');
+        renderTimetable(currentIndex);
+    }
+});
 
 // Create empty timetable
 function createTimetable() {
@@ -192,7 +193,6 @@ function renderTimetable(index) {
 	}
 }
 
-let popupTimeout;
 function showPopup(message, duration=3000) {
 	const popup = document.getElementById('popup');
 
@@ -213,5 +213,4 @@ function timetable() {
     renderTimetable(currentIndex);
 }
 
-console.log('[timetable] loaded');
 timetable();

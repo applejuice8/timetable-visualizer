@@ -1,23 +1,8 @@
 chrome.runtime.onMessage.addListener((msg) => {
     if (msg.type === 'SELECTED') {
-        console.log('Received SELECTED message:', msg.payload);
-        const comb = msg.payload;
-        
-        // interact with website DOM here
-        selectAllSubjects(comb); // Pass comb as parameter
-        submit();
+        selectAllSubjects(msg.payload);
     }
 });
-
-function selectAllSubjects(comb) {
-    document.querySelectorAll('.mySubject').forEach(subject => {
-        const name = subject.querySelector('label').innerText;
-        if (comb.some(item => item.name === name)) {
-            expandDropdown(subject);
-            selectSubject(subject, name, comb);
-        }
-    })
-}
 
 function expandDropdown(subject) {
     setTimeout(() => {
@@ -56,7 +41,16 @@ function submit() {
     setTimeout(() => {
         document.getElementById('btn_submit').click();
     }, 500);
-    
 }
 
 // Main
+function selectAllSubjects(comb) {
+    document.querySelectorAll('.mySubject').forEach(subject => {
+        const name = subject.querySelector('label').innerText;
+        if (comb.some(item => item.name === name)) {
+            expandDropdown(subject);
+            selectSubject(subject, name, comb);
+        }
+    })
+    submit();
+}
