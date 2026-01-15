@@ -1,18 +1,11 @@
-const mySubjects = [
-    'accounting',
-    'business finance',
-    'operating system',
-    'object-oriented',
-    'database fundamentals'
-    // 'web fundamentals',
-];
-
 chrome.runtime.onMessage.addListener((msg) => {
-    console.log(msg.type);
     if (msg.type === 'SCRAPE') {
+        mySubjects = msg.payload;
         scrape();
     }
 });
+
+let mySubjects;
 
 function getAllSubjectSlots() {
     resetAll();
@@ -37,8 +30,9 @@ function resetAll() {
 
 function isMySubject(subject) {
     const name = subject.querySelector('label').innerText;
+    const nameLower = name.toLowerCase()
 
-    if (mySubjects.some(s => name.toLowerCase().includes(s))) {
+    if (mySubjects.some(s => nameLower.includes(s))) {
         return name;
     }
 }

@@ -1,28 +1,29 @@
-// background.js
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-    if (message.type === 'SCRAPE') {
-        // Get the active tab and send message to content script
-        chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-        if (tabs[0].id) {
-            chrome.tabs.sendMessage(tabs[0].id, { type: 'SCRAPE' });
+function sendToActiveTab(msg) {
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+        const tab = tabs[0];
+        if (tab?.id) {
+            chrome.tabs.sendMessage(tab.id, msg);
         }
-        });
-    }
-    
-    if (message.type === 'SCRAPED_DATA') {
-        // Forward scraped data to popup
-        chrome.runtime.sendMessage(message);
-    }
-    
-    if (message.type === 'SELECTED') {
-        // Forward selection to content script
-        chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-        if (tabs[0].id) {
-            chrome.tabs.sendMessage(tabs[0].id, { 
-            type: 'SELECTED', 
-            payload: message.payload 
+    });
+}
+
+chrome.runtime.onMessage.addListener((msg) => {
+    switch (msg.type) {
+        case 'SCRAPE':
+            sendToActiveTab({
+                type: 'SCRAPE',
+                payload: msg.payload
             });
-        }
-        });
+            break;
+
+        case 'SCRAPED_DATA':
+            chrome.runtime.sendMessage(msg);
+            break;
+
+        case 'SELECT':
+            sendToActiveTab({ 
+                type: 'SELECT', 
+                payload: msg.payload
+            });
     }
 });

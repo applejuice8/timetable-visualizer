@@ -1,8 +1,25 @@
+chrome.runtime.onMessage.addListener((msg) => {
+    if (msg.type === 'SCRAPED_DATA') {
+		showPopup('Refreshed time slots');
+        combs = msg.payload;
+        renderTimetable(currentIndex);
+    }
+});
+
 const colorMap = new Map();
 let colorIndex = 0;
 let currentIndex = 0;
 let combs = [];
 let popupTimeout;
+
+const mySubjects = [
+    'accounting',
+    'business finance',
+    'operating system',
+    'object-oriented',
+    'database fundamentals'
+    // 'web fundamentals',
+];
 
 const COLORS = [
 	'#FF9AA2',
@@ -14,14 +31,6 @@ const COLORS = [
 ]
 
 const DAYS = ['MON', 'TUE', 'WED', 'THU', 'FRI'];
-
-chrome.runtime.onMessage.addListener((msg) => {
-    if (msg.type === 'SCRAPED_DATA') {
-        combs = msg.payload;
-		showPopup('Refreshed time slots');
-        renderTimetable(currentIndex);
-    }
-});
 
 // Create empty timetable
 function createTimetable() {
@@ -131,7 +140,7 @@ function setupButtons() {
 
     // Refresh
     document.getElementById('refresh').addEventListener('click', () => {
-        chrome.runtime.sendMessage({ type: 'SCRAPE' });
+        chrome.runtime.sendMessage({ type: 'SCRAPE', payload: mySubjects });
 		currentIndex = 0;
 		indexSpan.textContent = currentIndex + 1;
     });
@@ -139,14 +148,11 @@ function setupButtons() {
     // Select
     document.getElementById('select').addEventListener('click', () => {
         if (combs && combs[currentIndex]) {
-            console.log('Selecting combination:', currentIndex);
             chrome.runtime.sendMessage({
-                type: 'SELECTED',
+                type: 'SELECT',
                 payload: combs[currentIndex]
             });
 			showPopup(`Selected Timetable ${currentIndex + 1}`);
-        } else {
-            console.log('No data to select');
         }
     });
 }

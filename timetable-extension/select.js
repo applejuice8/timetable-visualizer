@@ -1,5 +1,5 @@
 chrome.runtime.onMessage.addListener((msg) => {
-    if (msg.type === 'SELECTED') {
+    if (msg.type === 'SELECT') {
         selectAllSubjects(msg.payload);
     }
 });
