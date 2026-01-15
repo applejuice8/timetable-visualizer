@@ -5,11 +5,12 @@ let combs = [];
 let popupTimeout;
 
 const COLORS = [
-	'#12f48e',
-	'#1ac1e7',
-	'#e5bd38',
-	'#dd3b49',
-	'#3772e6'
+	'#FF9AA2',
+	'#12F48E',
+	'#FFCC80',
+	'#4FC3F7',
+	'#C792EA',
+	'#64B5F6'
 ]
 
 const DAYS = ['MON', 'TUE', 'WED', 'THU', 'FRI'];
@@ -187,9 +188,9 @@ function renderTimetable(index) {
 		const colIndex = timeToIndex(cl.start);
 		const colSpan = calcColSpan(cl.start, cl.end);
 		const col = cols[colIndex];
-		const cleanName = name.split(' - ')[1].slice(0, 5.5 * colSpan);		//22
+		const cleanName = name.split(' - ')[1];
 
-		col.innerHTML = `${cleanName} (${cl.type})<br>Group ${cl.group}`;;
+		col.innerHTML = `${cleanName}<br>(${cl.type}${cl.group})`;;
 		col.colSpan = colSpan;
         col.style.backgroundColor = color;
 		hideCols(cols, colIndex, colSpan);
