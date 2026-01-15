@@ -1,8 +1,10 @@
 const mySubjects = [
+    'accounting',
+    'business finance',
     'operating system',
-    'web fundamentals',
     'object-oriented',
     'database fundamentals'
+    // 'web fundamentals',
 ];
 
 chrome.runtime.onMessage.addListener((msg) => {
@@ -13,6 +15,8 @@ chrome.runtime.onMessage.addListener((msg) => {
 });
 
 function getAllSubjectSlots() {
+    resetAll();
+
     const slots = [];
     document.querySelectorAll('.mySubject').forEach(subject => {
         const name = isMySubject(subject);
@@ -25,6 +29,12 @@ function getAllSubjectSlots() {
     return slots;
 }
 
+function resetAll() {
+    document.querySelectorAll('button.btn-danger').forEach(dropBtn => {
+        dropBtn.click();
+    });
+}
+
 function isMySubject(subject) {
     const name = subject.querySelector('label').innerText;
 
@@ -34,11 +44,9 @@ function isMySubject(subject) {
 }
 
 function expandDropdown(subject) {
-    setTimeout(() => {
-        subject.querySelectorAll('.glyphicon-chevron-down').forEach(arrow => {
-            arrow.click();
-        });
-    }, 500);
+    subject.querySelectorAll('.glyphicon-chevron-down').forEach(arrow => {
+        arrow.click();
+    });
 }
 
 function getSubjectSlots(subject, name) {
