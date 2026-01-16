@@ -1,17 +1,3 @@
-chrome.runtime.onMessage.addListener((msg) => {
-    if (msg.type === 'SCRAPED_DATA') {
-		showPopup('Refreshed time slots');
-        combs = msg.payload;
-        renderTimetable(currentIndex);
-    }
-});
-
-const colorMap = new Map();
-let colorIndex = 0;
-let currentIndex = 0;
-let combs = [];
-let popupTimeout;
-
 const mySubjects = [
     'accounting',
     'business finance',
@@ -20,6 +6,22 @@ const mySubjects = [
     'database fundamentals'
     // 'web fundamentals',
 ];
+
+chrome.runtime.onMessage.addListener((msg) => {
+	switch (msg.type) {
+		case 'SCRAPED_DATA':
+			showPopup('Refreshed time slots');
+			combs = msg.payload;
+			renderTimetable(currentIndex);
+			break;
+	}
+});
+
+const colorMap = new Map();
+let colorIndex = 0;
+let currentIndex = 0;
+let combs = [];
+let popupTimeout;
 
 const COLORS = [
 	'#FF9AA2',
@@ -140,7 +142,10 @@ function setupButtons() {
 
     // Refresh
     document.getElementById('refresh').addEventListener('click', () => {
-        chrome.runtime.sendMessage({ type: 'SCRAPE', payload: mySubjects });
+        chrome.runtime.sendMessage({
+			type: 'SCRAPE',
+			payload: mySubjects
+		});
 		currentIndex = 0;
 		indexSpan.textContent = currentIndex + 1;
     });

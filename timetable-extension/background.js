@@ -1,5 +1,5 @@
 function sendToActiveTab(msg) {
-    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+    chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
         const tab = tabs[0];
         if (tab?.id) {
             chrome.tabs.sendMessage(tab.id, msg);

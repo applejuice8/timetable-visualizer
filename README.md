@@ -12,8 +12,8 @@ scrape.js
 
 # Select
 timetable.js
-    ↓ 1. chrome.runtime.sendMessage({ type: 'SELECT' })
+    ↓ chrome.runtime.sendMessage({ type: 'SELECT' })
 background.js
-    ↓ 2. chrome.tabs.sendMessage(tabs[0].id, { type: 'SELECT' })
+    ↓ chrome.tabs.sendMessage(tabs[0].id, { type: 'SELECT' })
 scrape.js
 ```
