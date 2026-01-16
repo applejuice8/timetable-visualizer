@@ -10,8 +10,14 @@ chrome.runtime.onMessage.addListener((msg) => {
 	switch (msg.type) {
 		case 'SCRAPED_DATA':
 			combs = msg.payload;
+			if (combs[0].length === 0) {
+				showPopup('error', 'No results found');
+				break;
+			}
 			renderTimetable(currentIndex);
-			showPopup('success', `Refreshed time slots (${combs.length} combinations)`);
+			const len = combs.length;
+			document.getElementById('total').innerText = `/ ${len}`;
+			showPopup('success', `Refreshed (${len} combinations found)`);
 			break;
 
 		case 'POPUP':
@@ -161,13 +167,15 @@ function setupConnectors() {
 
     // Select
     document.getElementById('select').addEventListener('click', () => {
-        if (combs && combs[currentIndex]) {
+        if (combs[0].length !== 0 && combs[currentIndex]) {
             chrome.runtime.sendMessage({
                 type: 'SELECT',
                 payload: combs[currentIndex]
             });
 			showPopup('success', `Selected Timetable ${currentIndex + 1}`);
-        }
+        } else {
+			showPopup('error', 'Cannot be selected');
+		}
     });
 }
 
