@@ -15,8 +15,7 @@ git clone https://github.com/applejuice8/timetable-visualizer.git
 
 2. Open chome extensions page on Google Chrome (`chrome://extensions/`).
 
-3. Enable developer mode
-In the top-right corner of the extensions page, toggle Developer mode ON.
+3. In the top-right corner of the extensions page, toggle Developer mode ON.
 
 4. Load the extension
     1. Click `Load unpacked` in the top-corner of the extensions page.
@@ -26,7 +25,7 @@ In the top-right corner of the extensions page, toggle Developer mode ON.
 
 # Usage
 
-1. In `popup/timetable.js`, edit the `mySubjects` list to your respective subjects.
+1. In `popup/timetable.js`, edit the `mySubjects` list to your respective subjects. You do not need the full subject name, just a unique substring such as "operating system" instead of "Operating System Fundamentals".
 
 2. Navigate to iZone timetable selection page `https://izone.sunway.edu.my/...`
 
