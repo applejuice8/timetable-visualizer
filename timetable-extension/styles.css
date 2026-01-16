@@ -4,10 +4,6 @@ html, body {
     overflow: hidden;
 }
 
-#popup {
-    background-color: greenyellow;
-}
-
 .hidden {
     display: none;
 }

@@ -29,6 +29,11 @@ function clickIfMatch(option, cl) {
 
     if (matchType && matchGroup) {
         if (option.disabled) {
+            chrome.runtime.sendMessage({
+                type: 'POPUP',
+                status: 'error',
+                payload: `Missing ${cl.type} class for ${cl.name}`
+            });
             throw new Error(`Missing ${cl.type} class for ${cl.name}`);
         }
         option.click();

@@ -3,17 +3,19 @@ const mySubjects = [
     'business finance',
     'operating system',
     'object-oriented',
-    'database fundamentals'
-    // 'web fundamentals',
+    'Database Fundamentals',
 ];
 
 chrome.runtime.onMessage.addListener((msg) => {
 	switch (msg.type) {
 		case 'SCRAPED_DATA':
-			showPopup('Refreshed time slots');
 			combs = msg.payload;
 			renderTimetable(currentIndex);
+			showPopup('success', `Refreshed time slots (${combs.length} combinations)`);
 			break;
+
+		case 'POPUP':
+			showPopup(msg.status, msg.payload);
 	}
 });
 
@@ -33,6 +35,11 @@ const COLORS = [
 ]
 
 const DAYS = ['MON', 'TUE', 'WED', 'THU', 'FRI'];
+
+// toLower
+mySubjects.forEach((mySubject, i) => {
+    mySubjects[i] = mySubject.toLowerCase();
+});
 
 // Create empty timetable
 function createTimetable() {
@@ -121,7 +128,7 @@ function calcColSpan(startStr, endStr) {
     return (end - start) / 50;
 }
 
-function setupButtons() {
+function setupNavButtons() {
 	indexSpan = document.getElementById('index');
 
 	document.getElementById('prev').addEventListener('click', () => {
@@ -139,7 +146,9 @@ function setupButtons() {
 			renderTimetable(currentIndex);
 		}
 	});
+}
 
+function setupConnectors() {
     // Refresh
     document.getElementById('refresh').addEventListener('click', () => {
         chrome.runtime.sendMessage({
@@ -157,7 +166,7 @@ function setupButtons() {
                 type: 'SELECT',
                 payload: combs[currentIndex]
             });
-			showPopup(`Selected Timetable ${currentIndex + 1}`);
+			showPopup('success', `Selected Timetable ${currentIndex + 1}`);
         }
     });
 }
@@ -188,7 +197,10 @@ function renderTimetable(index) {
 	clearTimetable();
 
     const comb = combs[index];
-    if (!comb) return;
+    if (!comb) {
+		showPopup('error', 'No valid combinations');
+		return;
+	}
 
 	for (const cl of comb) {
         const name = cl.name;
@@ -208,12 +220,15 @@ function renderTimetable(index) {
 	}
 }
 
-function showPopup(message, duration=3000) {
+function showPopup(status, msg, duration=3000) {
 	const popup = document.getElementById('popup');
 
-	window.scrollTo(0, 0);
-	popup.textContent = message;
+	popup.classList.toggle('alert-success', status === 'success');
+	popup.classList.toggle('alert-danger', status === 'error');
 	popup.classList.remove('hidden');
+
+	window.scrollTo(0, 0);
+	popup.textContent = msg;
 
 	clearTimeout(popupTimeout);
 	popupTimeout = setTimeout(() => {
@@ -223,7 +238,8 @@ function showPopup(message, duration=3000) {
 
 // Main
 function timetable() {
-    setupButtons();
+    setupNavButtons();
+	setupConnectors();
     createTimetable();
     renderTimetable(currentIndex);
 }

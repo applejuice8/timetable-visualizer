@@ -9,21 +9,16 @@ function sendToActiveTab(msg) {
 
 chrome.runtime.onMessage.addListener((msg) => {
     switch (msg.type) {
+        // Send to timetable.html
         case 'SCRAPE':
-            sendToActiveTab({
-                type: 'SCRAPE',
-                payload: msg.payload
-            });
+        case 'SELECT':
+            sendToActiveTab(msg);
             break;
 
+        // Send to timetable.js
         case 'SCRAPED_DATA':
+        case 'POPUP':
             chrome.runtime.sendMessage(msg);
             break;
-
-        case 'SELECT':
-            sendToActiveTab({ 
-                type: 'SELECT', 
-                payload: msg.payload
-            });
     }
 });

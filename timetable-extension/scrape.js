@@ -73,6 +73,11 @@ function getSubjectSlots(subject, name) {
             }
         })
         if (typeSlots.length === 0) {
+            chrome.runtime.sendMessage({
+                type: 'POPUP',
+                status: 'error',
+                payload: `Missing ${type} class for ${name}`
+            });
             throw new Error(`Missing ${type} class for ${name}`);
         }
         slots.push(typeSlots);
