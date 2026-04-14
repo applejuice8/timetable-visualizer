@@ -125,10 +125,90 @@ function generateComb(slots) {
     return combs;
 }
 
+function rankCombs(combs) {
+    const DAY_ORDER = { MON: 0, TUE: 1, WED: 2, THU: 3, FRI: 4 };
+
+    function getClassesByDay(comb) {
+        const map = {};
+        for (const cl of comb) {
+            for (const p of cl.periods) {
+                if (!map[p.day]) map[p.day] = [];
+                map[p.day].push(p);
+            }
+        }
+        return map;
+    }
+
+    function hasLunch(periods) {
+        const sorted = [...periods].sort((a, b) => toMinutes(a.start) - toMinutes(b.start));
+
+        // Free before 11: first class starts at/after 11:30 (can eat before)
+        if (toMinutes(sorted[0].start) >= toMinutes('11:30')) return true;
+
+        // Free after 13:30: last class ends by 13:30 (can eat after)
+        if (toMinutes(sorted[sorted.length - 1].end) <= toMinutes('13:30')) return true;
+
+        // All classes end by 11: free rest of day
+        if (toMinutes(sorted[sorted.length - 1].end) <= toMinutes('11:00')) return true;
+
+        // All classes start at/after 14: free before
+        if (toMinutes(sorted[0].start) >= toMinutes('14:00')) return true;
+
+        // Gap within 11:00-14:00 of at least 30 min
+        for (let i = 0; i < sorted.length - 1; i++) {
+            const gapStart = toMinutes(sorted[i].end);
+            const gapEnd = toMinutes(sorted[i + 1].start);
+            const overlapStart = Math.max(gapStart, toMinutes('11:00'));
+            const overlapEnd = Math.min(gapEnd, toMinutes('14:00'));
+            if (overlapEnd - overlapStart >= 30) return true;
+        }
+
+        return false;
+    }
+
+    function countBigGaps(periods) {
+        const sorted = [...periods].sort((a, b) => toMinutes(a.start) - toMinutes(b.start));
+        let count = 0;
+        for (let i = 0; i < sorted.length - 1; i++) {
+            if (toMinutes(sorted[i + 1].start) - toMinutes(sorted[i].end) > 180) count++;
+        }
+        return count;
+    }
+
+    // 1. Filter out combos with no valid lunch on any school day
+    const filtered = combs.filter(comb => {
+        const byDay = getClassesByDay(comb);
+        return Object.values(byDay).every(periods => hasLunch(periods));
+    });
+
+    // 2. Sort
+    filtered.sort((a, b) => {
+        const aDays = getClassesByDay(a);
+        const bDays = getClassesByDay(b);
+
+        // Rule 2: fewest big gaps
+        const aGaps = Object.values(aDays).reduce((sum, p) => sum + countBigGaps(p), 0);
+        const bGaps = Object.values(bDays).reduce((sum, p) => sum + countBigGaps(p), 0);
+        if (aGaps !== bGaps) return aGaps - bGaps;
+
+        // Rule 3: fewest school days
+        const aDayCount = Object.keys(aDays).length;
+        const bDayCount = Object.keys(bDays).length;
+        if (aDayCount !== bDayCount) return aDayCount - bDayCount;
+
+        // Rule 4: prefer latest day to be as early as possible
+        const aLatest = Math.max(...Object.keys(aDays).map(d => DAY_ORDER[d]));
+        const bLatest = Math.max(...Object.keys(bDays).map(d => DAY_ORDER[d]));
+        return aLatest - bLatest;
+    });
+
+    return filtered;
+}
+
 // Main
 function scrape() {
     slots = getAllSubjectSlots();
-    combs = generateComb(slots);
+    combs = rankCombs(generateComb(slots));
 
     chrome.runtime.sendMessage({
         type: 'SCRAPED_DATA',
