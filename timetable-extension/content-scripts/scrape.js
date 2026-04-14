@@ -131,6 +131,10 @@ function rankCombs(combs) {
     function getClassesByDay(comb) {
         const map = {};
         for (const cl of comb) {
+
+            // Skip online class
+            if (cl.location.toLowerCase().includes('online')) continue;
+
             for (const p of cl.periods) {
                 if (!map[p.day]) map[p.day] = [];
                 map[p.day].push(p);
@@ -175,6 +179,23 @@ function rankCombs(combs) {
         return count;
     }
 
+    function totalGapMinutes(byDay) {
+        return Object.values(byDay).reduce((sum, periods) => {
+            const sorted = [...periods].sort((a, b) => toMinutes(a.start) - toMinutes(b.start));
+            for (let i = 0; i < sorted.length - 1; i++) {
+                sum += toMinutes(sorted[i + 1].start) - toMinutes(sorted[i].end);
+            }
+            return sum;
+        }, 0);
+    }
+
+    function scheduleKey(byDay) {
+        return Object.keys(byDay).sort().map(day => {
+            const sorted = [...byDay[day]].sort((a, b) => toMinutes(a.start) - toMinutes(b.start));
+            return day + ':' + sorted.map(p => `${p.start}-${p.end}`).join(',');
+        }).join('|');
+    }
+
     // 1. Filter out combos with no valid lunch on any school day
     const filtered = combs.filter(comb => {
         const byDay = getClassesByDay(comb);
@@ -199,7 +220,15 @@ function rankCombs(combs) {
         // Rule 4: prefer latest day to be as early as possible
         const aLatest = Math.max(...Object.keys(aDays).map(d => DAY_ORDER[d]));
         const bLatest = Math.max(...Object.keys(bDays).map(d => DAY_ORDER[d]));
-        return aLatest - bLatest;
+        if (aLatest !== bLatest) return aLatest - bLatest;
+
+        // Rule 5: minimize total gap minutes (keeps identical-schedule combs together)
+        const aTotal = totalGapMinutes(aDays);
+        const bTotal = totalGapMinutes(bDays);
+        if (aTotal !== bTotal) return aTotal - bTotal;
+
+        // Rule 6: group identical schedules together
+        return scheduleKey(aDays).localeCompare(scheduleKey(bDays));
     });
 
     return filtered;

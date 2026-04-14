@@ -209,6 +209,7 @@ function renderTimetable(index) {
 		showPopup('error', 'No valid combinations');
 		return;
 	}
+	console.log('Current comb:', JSON.stringify(comb, null, 2));
 
 	for (const cl of comb) {
         const name = cl.name;
@@ -222,7 +223,8 @@ function renderTimetable(index) {
 			const colSpan = calcColSpan(p.start, p.end);
 			const col = cols[colIndex];
 
-			col.innerHTML = `${cleanName}<br>(${cl.type}${cl.group})`;
+			const isOnline = cl.location.toLowerCase().includes('online');
+			col.innerHTML = `${cleanName}<br>(${cl.type}${cl.group})${isOnline ? ' Online' : ''}`;
 			col.colSpan = colSpan;
 			col.style.backgroundColor = color;
 			hideCols(cols, colIndex, colSpan);
