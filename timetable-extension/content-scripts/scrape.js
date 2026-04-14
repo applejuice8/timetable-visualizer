@@ -55,7 +55,12 @@ function getSubjectSlots(subject, name) {
 
             if (!input.disabled) {
                 const group = input.getAttribute('data-groupno').split(' ')[1];
-                const [day, start, end] = input.getAttribute('period-time-str').split('-');
+                const periodStr = input.getAttribute('period-time-str');
+                if (!periodStr) return;
+                const periods = periodStr.split('|').map(p => {
+                    const [day, start, end] = p.split('-');
+                    return { day, start: start?.slice(0, 5), end: end?.slice(0, 5) };
+                });
 
                 const tds = thead.nextElementSibling.querySelectorAll('td');
                 const location = tds[tds.length - 1].innerText;
@@ -64,9 +69,7 @@ function getSubjectSlots(subject, name) {
                     name: name,
                     type: type,
                     group: group,
-                    day: day,
-                    start: start.replace(':00', ''),
-                    end: end.replace(':00', ''),
+                    periods: periods,
                     location: location
                 };
                 typeSlots.push(info);
@@ -91,16 +94,15 @@ function toMinutes(time) {
 }
 
 function clashesWithAny(slot, selected) {
-    return selected.some(s => {
-        if (slot.day !== s.day) return false;
-
-        const slotStart = toMinutes(slot.start);
-        const slotEnd = toMinutes(slot.end);
-        const sStart = toMinutes(s.start);
-        const sEnd = toMinutes(s.end);
-
-        return slotStart < sEnd && sStart < slotEnd;
-    });
+    return slot.periods.some(p =>
+        selected.some(s =>
+            s.periods.some(sp => {
+                if (p.day !== sp.day) return false;
+                return toMinutes(p.start) < toMinutes(sp.end) &&
+                       toMinutes(sp.start) < toMinutes(p.end);
+            })
+        )
+    );
 }
 
 function generateComb(slots) {

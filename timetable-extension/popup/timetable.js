@@ -1,9 +1,9 @@
 const mySubjects = [
-    'accounting',
-    'business finance',
-    'operating system',
-    'object-oriented',
-    'Database Fundamentals',
+    'artificial intelligence',
+    'digital image',
+    'communication',
+    'corruption',
+    'object-oriented programming',
 ];
 
 chrome.runtime.onMessage.addListener((msg) => {
@@ -214,17 +214,19 @@ function renderTimetable(index) {
         const name = cl.name;
         const color = getColor(name);
 
-		const targetRow = document.getElementById(cl.day);
-		const cols = targetRow.querySelectorAll('td');
-		const colIndex = timeToIndex(cl.start);
-		const colSpan = calcColSpan(cl.start, cl.end);
-		const col = cols[colIndex];
 		const cleanName = name.split(' - ')[1];
+		for (const p of cl.periods) {
+			const targetRow = document.getElementById(p.day);
+			const cols = targetRow.querySelectorAll('td');
+			const colIndex = timeToIndex(p.start);
+			const colSpan = calcColSpan(p.start, p.end);
+			const col = cols[colIndex];
 
-		col.innerHTML = `${cleanName}<br>(${cl.type}${cl.group})`;;
-		col.colSpan = colSpan;
-        col.style.backgroundColor = color;
-		hideCols(cols, colIndex, colSpan);
+			col.innerHTML = `${cleanName}<br>(${cl.type}${cl.group})`;
+			col.colSpan = colSpan;
+			col.style.backgroundColor = color;
+			hideCols(cols, colIndex, colSpan);
+		}
 	}
 }
 
