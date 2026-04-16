@@ -129,8 +129,6 @@ function generateComb(slots) {
 }
 
 function rankCombs(combs) {
-    const DAY_ORDER = { MON: 0, TUE: 1, WED: 2, THU: 3, FRI: 4 };
-
     function getClassesByDay(comb) {
         const map = {};
         for (const cl of comb) {
@@ -192,11 +190,19 @@ function rankCombs(combs) {
         }, 0);
     }
 
-    function scheduleKey(byDay) {
-        return Object.keys(byDay).sort().map(day => {
-            const sorted = [...byDay[day]].sort((a, b) => toMinutes(a.start) - toMinutes(b.start));
-            return day + ':' + sorted.map(p => `${p.start}-${p.end}`).join(',');
-        }).join('|');
+    function totalStartMinutes(days) {
+        return Object.values(days).flat().reduce((sum, p) => sum + toMinutes(p.start), 0);
+    }
+
+    function score(days) {
+        const gaps = Object.values(days).reduce((sum, p) => sum + countBigGaps(p), 0);
+        const totalGaps = totalGapMinutes(days);
+        const dayCount = Object.keys(days).length;
+        const startMinutes = totalStartMinutes(days);
+        // console.log(`gaps: ${gaps}, totalGaps: ${totalGaps}, dayCount: ${dayCount}, startMinutes: ${startMinutes}`);
+
+        // gaps: 0, totalGaps: 510, dayCount: 4, avg: 710
+        return (gaps * 10000) + (totalGaps * 10) + (dayCount * 2700) + (startMinutes * 10);
     }
 
     // 1. Filter out combos with no valid lunch on any school day
@@ -209,29 +215,7 @@ function rankCombs(combs) {
     filtered.sort((a, b) => {
         const aDays = getClassesByDay(a);
         const bDays = getClassesByDay(b);
-
-        // Rule 2: fewest big gaps
-        const aGaps = Object.values(aDays).reduce((sum, p) => sum + countBigGaps(p), 0);
-        const bGaps = Object.values(bDays).reduce((sum, p) => sum + countBigGaps(p), 0);
-        if (aGaps !== bGaps) return aGaps - bGaps;
-
-        // Rule 3: fewest school days
-        const aDayCount = Object.keys(aDays).length;
-        const bDayCount = Object.keys(bDays).length;
-        if (aDayCount !== bDayCount) return aDayCount - bDayCount;
-
-        // Rule 4: prefer latest day to be as early as possible
-        const aLatest = Math.max(...Object.keys(aDays).map(d => DAY_ORDER[d]));
-        const bLatest = Math.max(...Object.keys(bDays).map(d => DAY_ORDER[d]));
-        if (aLatest !== bLatest) return aLatest - bLatest;
-
-        // Rule 5: minimize total gap minutes (keeps identical-schedule combs together)
-        const aTotal = totalGapMinutes(aDays);
-        const bTotal = totalGapMinutes(bDays);
-        if (aTotal !== bTotal) return aTotal - bTotal;
-
-        // Rule 6: group identical schedules together
-        return scheduleKey(aDays).localeCompare(scheduleKey(bDays));
+        return score(aDays) - score(bDays);
     });
 
     return filtered;

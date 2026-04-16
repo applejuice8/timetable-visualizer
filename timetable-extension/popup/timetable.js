@@ -27,6 +27,8 @@ chrome.runtime.onMessage.addListener((msg) => {
 
 			renderTimetable(currentIndex);
 			const len = combs.length;
+			currentIndex = 0;
+			indexSpan.textContent = 1;
 			document.getElementById('total').innerText = `/ ${len}`;
 			showPopup('success', `Refreshed (${len} combinations found)`);
 			break;
@@ -42,8 +44,6 @@ chrome.runtime.onMessage.addListener((msg) => {
 					includeFull: includeFull
 				}
 			});
-			currentIndex = 0;
-			indexSpan.textContent = 1;
 	}
 });
 
@@ -180,8 +180,6 @@ function setupFuncButtons() {
 				includeFull: includeFull
 			}
 		});
-		currentIndex = 0;
-		indexSpan.textContent = currentIndex + 1;
     });
 
     // Select
