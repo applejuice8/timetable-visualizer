@@ -11,6 +11,7 @@ let colorIndex = 0;
 let currentIndex = 0;
 let combs = [];
 let popupTimeout;
+let includeFull = false;
 
 // Receive message
 chrome.runtime.onMessage.addListener((msg) => {
@@ -37,7 +38,8 @@ chrome.runtime.onMessage.addListener((msg) => {
 			chrome.runtime.sendMessage({
 				type: 'SCRAPE',
 				payload: {
-					subjects: mySubjects
+					subjects: mySubjects,
+					includeFull: includeFull
 				}
 			});
 			currentIndex = 0;
@@ -168,13 +170,14 @@ function setupNavButtons() {
 	});
 }
 
-function setupConnectors() {
+function setupFuncButtons() {
     // Refresh
     document.getElementById('refresh').addEventListener('click', () => {
         chrome.runtime.sendMessage({
 			type: 'SCRAPE',
 			payload: {
-				subjects: mySubjects
+				subjects: mySubjects,
+				includeFull: includeFull
 			}
 		});
 		currentIndex = 0;
@@ -195,6 +198,11 @@ function setupConnectors() {
 			showPopup('error', 'Cannot be selected');
 		}
     });
+
+	// Include full
+	document.getElementById('includeFull').addEventListener('change', (e) => {
+		includeFull = e.target.checked;
+	})
 }
 
 function clearTimetable() {
@@ -276,7 +284,7 @@ function showPopup(status, msg, isPriority=false, duration=3000) {
 function timetable() {
 	try {
 		setupNavButtons();
-		setupConnectors();
+		setupFuncButtons();
 		createTimetable();
 		renderTimetable(currentIndex);
 	} catch(err) {

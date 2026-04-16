@@ -1,6 +1,7 @@
 chrome.runtime.onMessage.addListener((msg) => {
     if (msg.type === 'SCRAPE') {
         mySubjects = msg.payload.subjects;
+        includeFull = msg.payload.includeFull;
         scrape();
     }
 });
@@ -53,7 +54,7 @@ function getSubjectSlots(subject, name) {
         panelGroup.querySelectorAll('.izoneThead').forEach(thead => {
             const input = thead.querySelector('input');
 
-            if (!input.disabled) {
+            if (!input.disabled || includeFull) {
                 const group = input.getAttribute('data-groupno').split(' ')[1];
                 const periodStr = input.getAttribute('period-time-str');
                 if (!periodStr) return;
