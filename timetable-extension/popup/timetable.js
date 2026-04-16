@@ -1,7 +1,7 @@
 const mySubjects = [
     'artificial intelligence',
     'digital image',
-    'communication',
+    'communication skills',
     'corruption',
     'object-oriented programming',
 ];
@@ -10,10 +10,13 @@ chrome.runtime.onMessage.addListener((msg) => {
 	switch (msg.type) {
 		case 'SCRAPED_DATA':
 			combs = msg.payload;
-			if (combs[0].length === 0) {
-				showPopup('error', 'No results found');
+
+			// Error handling
+			if (!combs[0]) {
+				showPopup('error', 'No valid combinations found. (Try checking if subject names are unique)');
 				break;
 			}
+
 			renderTimetable(currentIndex);
 			const len = combs.length;
 			document.getElementById('total').innerText = `/ ${len}`;
@@ -204,9 +207,10 @@ function getColor(name) {
 function renderTimetable(index) {
 	clearTimetable();
 
+	// Get current comb
     const comb = combs[index];
     if (!comb) {
-		showPopup('error', 'No valid combinations');
+		showPopup('neutral', 'Click "Refresh" to start');
 		return;
 	}
 	console.log('Current comb:', JSON.stringify(comb, null, 2));
@@ -237,6 +241,7 @@ function showPopup(status, msg, duration=3000) {
 
 	popup.classList.toggle('alert-success', status === 'success');
 	popup.classList.toggle('alert-danger', status === 'error');
+	popup.classList.toggle('alert-primary', status === 'neutral');
 	popup.classList.remove('hidden');
 
 	window.scrollTo(0, 0);
