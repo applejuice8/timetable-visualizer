@@ -1,6 +1,6 @@
 chrome.runtime.onMessage.addListener((msg) => {
     if (msg.type === 'SELECT') {
-        selectAllSubjects(msg.payload);
+        selectAllSubjects(msg.payload.comb);
     }
 });
 
@@ -32,8 +32,14 @@ function clickIfMatch(option, cl) {
             chrome.runtime.sendMessage({
                 type: 'POPUP',
                 status: 'error',
-                payload: `Missing ${cl.type} class for ${cl.name}`
+                payload: {
+                    popupContent: `${cl.type} class for ${cl.name} is full. Choose again.`,
+                    isPriority: true
+                }
             });
+
+            // Scrape again
+            chrome.runtime.sendMessage({ type: 'CLASS_FULL' });
             throw new Error(`Missing ${cl.type} class for ${cl.name}`);
         }
         option.click();
@@ -50,12 +56,17 @@ function submit() {
 
 // Main
 function selectAllSubjects(comb) {
-    document.querySelectorAll('.mySubject').forEach(subject => {
-        const name = subject.querySelector('label').innerText;
-        if (comb.some(item => item.name === name)) {
-            expandDropdown(subject);
-            selectSubject(subject, name, comb);
-        }
-    })
-    submit();
+    try {
+        document.querySelectorAll('.mySubject').forEach(subject => {
+            const name = subject.querySelector('label').innerText;
+            if (comb.some(item => item.name === name)) {
+                expandDropdown(subject);
+                selectSubject(subject, name, comb);
+            }
+        })
+        console.log('Selected:', JSON.stringify(comb, null, 2));
+        submit();
+    } catch(err) {
+        console.log(`Error: ${err}`);
+    }
 }

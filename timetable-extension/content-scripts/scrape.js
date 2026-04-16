@@ -1,6 +1,6 @@
 chrome.runtime.onMessage.addListener((msg) => {
     if (msg.type === 'SCRAPE') {
-        mySubjects = msg.payload;
+        mySubjects = msg.payload.subjects;
         scrape();
     }
 });
@@ -79,7 +79,9 @@ function getSubjectSlots(subject, name) {
             chrome.runtime.sendMessage({
                 type: 'POPUP',
                 status: 'error',
-                payload: `Missing ${type} class for ${name}`
+                payload: {
+                    popupContent: `Missing ${type} class for ${name}`
+                }
             });
             throw new Error(`Missing ${type} class for ${name}`);
         }
@@ -236,11 +238,17 @@ function rankCombs(combs) {
 
 // Main
 function scrape() {
-    slots = getAllSubjectSlots();
-    combs = rankCombs(generateComb(slots));
+    try {
+        slots = getAllSubjectSlots();
+        combs = rankCombs(generateComb(slots));
 
-    chrome.runtime.sendMessage({
-        type: 'SCRAPED_DATA',
-        payload: combs
-    });
+        chrome.runtime.sendMessage({
+            type: 'SCRAPED_DATA',
+            payload: {
+                combs: combs
+            }
+        });
+    } catch(err) {
+        console.log(`Error: ${err}`);
+    }
 }

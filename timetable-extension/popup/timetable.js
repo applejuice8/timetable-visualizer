@@ -6,10 +6,17 @@ const mySubjects = [
     'object-oriented programming',
 ];
 
+const colorMap = new Map();
+let colorIndex = 0;
+let currentIndex = 0;
+let combs = [];
+let popupTimeout;
+
+// Receive message
 chrome.runtime.onMessage.addListener((msg) => {
 	switch (msg.type) {
 		case 'SCRAPED_DATA':
-			combs = msg.payload;
+			combs = msg.payload.combs;
 
 			// Error handling
 			if (!combs[0]) {
@@ -24,15 +31,19 @@ chrome.runtime.onMessage.addListener((msg) => {
 			break;
 
 		case 'POPUP':
-			showPopup(msg.status, msg.payload);
+			showPopup(msg.status, msg.payload.popupContent, msg.payload.isPriority ?? false);
+		
+		case 'CLASS_FULL':
+			chrome.runtime.sendMessage({
+				type: 'SCRAPE',
+				payload: {
+					subjects: mySubjects
+				}
+			});
+			currentIndex = 0;
+			indexSpan.textContent = 1;
 	}
 });
-
-const colorMap = new Map();
-let colorIndex = 0;
-let currentIndex = 0;
-let combs = [];
-let popupTimeout;
 
 const COLORS = [
 	'#FF9AA2',
@@ -162,7 +173,9 @@ function setupConnectors() {
     document.getElementById('refresh').addEventListener('click', () => {
         chrome.runtime.sendMessage({
 			type: 'SCRAPE',
-			payload: mySubjects
+			payload: {
+				subjects: mySubjects
+			}
 		});
 		currentIndex = 0;
 		indexSpan.textContent = currentIndex + 1;
@@ -173,7 +186,9 @@ function setupConnectors() {
         if (combs[0].length !== 0 && combs[currentIndex]) {
             chrome.runtime.sendMessage({
                 type: 'SELECT',
-                payload: combs[currentIndex]
+                payload: {
+					comb: combs[currentIndex]
+				}
             });
 			showPopup('success', `Selected Timetable ${currentIndex + 1}`);
         } else {
@@ -213,7 +228,6 @@ function renderTimetable(index) {
 		showPopup('neutral', 'Click "Refresh" to start');
 		return;
 	}
-	console.log('Current comb:', JSON.stringify(comb, null, 2));
 
 	for (const cl of comb) {
         const name = cl.name;
@@ -236,9 +250,11 @@ function renderTimetable(index) {
 	}
 }
 
-function showPopup(status, msg, duration=3000) {
-	const popup = document.getElementById('popup');
+let isPriorityActive = false;
+function showPopup(status, msg, isPriority=false, duration=3000) {
+	if (isPriorityActive) return;
 
+	const popup = document.getElementById('popup');
 	popup.classList.toggle('alert-success', status === 'success');
 	popup.classList.toggle('alert-danger', status === 'error');
 	popup.classList.toggle('alert-primary', status === 'neutral');
@@ -248,17 +264,25 @@ function showPopup(status, msg, duration=3000) {
 	popup.textContent = msg;
 
 	clearTimeout(popupTimeout);
+	if (isPriority) isPriorityActive = true;
+
 	popupTimeout = setTimeout(() => {
 		popup.classList.add('hidden');
+		isPriorityActive = false;
 	}, duration);
 }
 
 // Main
 function timetable() {
-    setupNavButtons();
-	setupConnectors();
-    createTimetable();
-    renderTimetable(currentIndex);
+	try {
+		setupNavButtons();
+		setupConnectors();
+		createTimetable();
+		renderTimetable(currentIndex);
+	} catch(err) {
+		showPopup('error', err)
+        console.log(`Error: ${err}`);
+    }
 }
 
 timetable();
