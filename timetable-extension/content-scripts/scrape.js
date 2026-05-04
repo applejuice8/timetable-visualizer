@@ -221,11 +221,45 @@ function rankCombs(combs) {
     return filtered;
 }
 
+function filterValidPairings(combs) {
+    const lectureGroups = {
+        '17': ['44', '45', '46'],
+        '18': ['47', '48', '49'],
+        '19': ['50']
+    };
+
+    const filtered = combs.filter(comb => {
+        const commSkill = comb.filter(cl => cl.name.toLowerCase().includes('communication skills'));
+        const lecture = commSkill.find(cl => cl.type === 'L');
+        const practical = commSkill.find(cl => cl.type === 'T');
+
+        if (!lecture || !practical) return true; // can't validate, keep it
+
+        const validPracticals = lectureGroups[lecture.group];
+        if (!validPracticals) return true;
+
+        return validPracticals.includes(practical.group);
+    });
+
+    console.log(combs.length);
+    console.log(filtered.length);
+
+    return filtered;
+}
+
 // Main
 function scrape() {
     try {
+        // Ori 
+        // slots = getAllSubjectSlots();
+        // combs = rankCombs(generateComb(slots));
+        
+        // If some subjects lecture limited by practicals (lecture 1 can only prac 1)
         slots = getAllSubjectSlots();
-        combs = rankCombs(generateComb(slots));
+        const allCombs = generateComb(slots);
+        const filtered = filterValidPairings(allCombs);
+        combs = rankCombs(filtered);  
+        // End new
 
         chrome.runtime.sendMessage({
             type: 'SCRAPED_DATA',
